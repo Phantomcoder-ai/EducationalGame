@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static System.TimeZoneInfo;
 
 public enum GameState
 {
@@ -22,6 +23,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameState currentState;
     public GameMode currentMode;
+
+    [Header("Transition Settings")]
+    public Animator transitionAnimator;
+    public float transitionTime = 1f;
 
     void Awake()
     {
@@ -53,13 +58,27 @@ public class GameManager : MonoBehaviour
         currentMode = GameMode.Words;
         currentState = GameState.Playing;
 
-        SceneManager.LoadScene("GameScene");
+        StartCoroutine(LoadLevel("GameScene"));
     }
 
     public void StartMathMode()
     {
         currentMode = GameMode.Math;
         currentState = GameState.Playing;
-        SceneManager.LoadScene("GameScene");
+        StartCoroutine(LoadLevel("GameScene"));
+    }
+
+    IEnumerator LoadLevel(string sceneName)
+    {
+        SetTransitionAnimation(true);
+
+        yield return new WaitForSeconds(transitionTime);
+        SceneManager.LoadScene(sceneName);
+        
+    }
+
+    public void SetTransitionAnimation(bool isActive)
+    {
+        transitionAnimator.SetBool("StartAnim", isActive);
     }
 }
