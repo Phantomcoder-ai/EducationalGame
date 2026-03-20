@@ -14,27 +14,36 @@ public class HookController : MonoBehaviour
     public Transform beachPoint;
     public CameraController camControl;
 
-    /*public void OnCastAnimationFinished()
+    public void OnCastAnimationFinished()
     {
-        // Этот метод вызовется, когда анимация заброса закончится
+        // 1. Находим компонент Animator на этом объекте
+        Animator anim = GetComponent<Animator>();
+
+        // 2. Если он есть, выключаем его
+        if (anim != null)
+        {
+            anim.enabled = false;
+            Debug.Log("Аниматор выключен. Теперь скрипт может двигать крючок!");
+        }
+
+        // 3. Запускаем падение и движение камеры
         isIntro = true;
         camControl.currentState = CameraController.CameraState.FollowingHook;
-        Debug.Log("Анимация окончена, начинаем спуск!");
-    }*/
+    }
 
     void Update()
     {
-        // СТАРТ ИГРЫ: Нажимаем пробел на берегу
+        /*// СТАРТ ИГРЫ: Нажимаем пробел на берегу
         if (Input.GetKeyDown(KeyCode.Space)) //!isIntro && !canMove && !isReelingIn && 
         {
             StartFishing();
-        }
+        }*/
 
         // 1. АВТОМАТИЧЕСКИЙ СПУСК
         if (isIntro)
         {
             transform.position = Vector3.MoveTowards(transform.position,
-                new Vector3(0, -13f, 0), introFallSpeed * Time.deltaTime);
+                new Vector3(transform.position.x, -13f, 0), introFallSpeed * Time.deltaTime);
 
             if (Mathf.Abs(transform.position.y - (-13f)) < 0.1f)
             {
@@ -83,12 +92,6 @@ public class HookController : MonoBehaviour
         }
     }
 
-    void StartFishing()
-    {
-        isIntro = true;
-        camControl.currentState = CameraController.CameraState.FollowingHook;
-    }
-
     void StartReeling()
     {
         canMove = false;
@@ -96,6 +99,10 @@ public class HookController : MonoBehaviour
         camControl.currentState = CameraController.CameraState.FollowingHook; // Камера снова едет за крючком
     }
 }
+
+// В месте, где ты готовишься к новому забросу:
+//GetComponent<Animator>().enabled = true;
+
 /*using UnityEngine;
 
 public class HookController : MonoBehaviour

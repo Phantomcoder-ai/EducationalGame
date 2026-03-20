@@ -5,38 +5,45 @@ public class GameSceneController : MonoBehaviour
 {
     public CameraController cameraController;
     public HookController hookController;
+    public Animator fishermanAnimator; // Ссылка на аниматор рыбака
 
-    public float introTime = 2f;
+    private bool isFishingStarted = false;
 
-    void Start()
+    void Update()
     {
-        StartCoroutine(Intro());
+        // Проверяем нажатие Пробела и что игра еще не началась
+        if (Input.GetKeyDown(KeyCode.Space) && !isFishingStarted)
+        {
+            StartFishingSequence();
+        }
     }
 
-    IEnumerator Intro()
+    // Метод, который запускает весь процесс
+    public void StartFishingSequence()
     {
-        // 1. Ждем немного на берегу
-        yield return new WaitForSeconds(5f);
+        isFishingStarted = true;
 
-        // 2. Включаем слежение за крючком
-        cameraController.currentState = CameraController.CameraState.FollowingHook;
+        // Вместо fishermanAnimator используем аниматор, который на самом крючке
+        // Мы можем достучаться до него через hookController
+        Animator hookAnim = hookController.GetComponent<Animator>();
 
-        // 3. Даем управление игроку
-        hookController.canMove = true;
+        if (hookAnim != null)
+        {
+            // Включаем аниматор (на случай, если он был выключен после прошлого раза)
+            hookAnim.enabled = true;
+            hookAnim.SetTrigger("CastFishingRod");
+            Debug.Log("Анимация КРЮЧКА запущена.");
+        }
+        else
+        {
+            Debug.LogError("На объекте Hook не найден Animator!");
+        }
     }
 
-    /*IEnumerator Intro()
-    {;
-
-        // 🎥 движение камеры
-        cameraController.move = true;
-
-        yield return new WaitForSeconds(introTime);
-
-        // 🛑 остановка
-        cameraController.move = false;
-
-        // 🎮 включаем управление
-        hookController.canMove = true;
-    }*/
+    // Этот метод можно вызвать позже (например, когда рыба поймана), 
+    // чтобы игрок снова мог нажать пробел для нового заброса.
+    public void ResetFishingStatus()
+    {
+        isFishingStarted = false;
+    }
 }
