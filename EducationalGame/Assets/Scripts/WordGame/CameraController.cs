@@ -4,43 +4,44 @@ public class CameraController : MonoBehaviour
 {
     public Transform beachPoint;
     public Transform hook;
-    public float followSpeed = 4f;
+    public float followSpeed = 5f;
 
     public float minY = -12f; // Координата Y "дна"
-    public float maxY = 0f;   // Координата Y "берега"
+    public float maxY = 5f;   // Координата Y "берега"
 
     public enum CameraState { AtBeach, FollowingHook, LockedAtBottom }
     public CameraState currentState = CameraState.AtBeach;
 
+    // Добавляем плавность через SmoothDamp (опционально, но лучше для камер)
+    private Vector3 velocity = Vector3.zero;
+    public float smoothTime = 0.15f;
+
     void LateUpdate()
     {
-        Vector3 targetPos = transform.position;
+        float targetY = transform.position.y; // Начинаем с текущей позиции
 
         switch (currentState)
         {
             case CameraState.AtBeach:
-                targetPos = new Vector3(transform.position.x, maxY, transform.position.z);
+                targetY = maxY;
                 break;
 
             case CameraState.FollowingHook:
                 // Следим за крючком, но не выходим за границы minY и maxY
-                float clampedY = Mathf.Clamp(hook.position.y, minY, maxY);
-                targetPos = new Vector3(transform.position.x, clampedY, transform.position.z);
-
-                // Если крючок достиг дна, фиксируем камеру
-                if (hook.position.y <= minY)
-                {
-                    currentState = CameraState.LockedAtBottom;
-                }
+                targetY = Mathf.Clamp(hook.position.y, minY, maxY);
                 break;
 
             case CameraState.LockedAtBottom:
                 // Камера просто стоит на месте внизу
-                targetPos = new Vector3(transform.position.x, minY, transform.position.z);
+                targetY = minY;
                 break;
         }
 
-        transform.position = Vector3.Lerp(transform.position, targetPos, followSpeed * Time.deltaTime);
+        Vector3 targetPos = new Vector3(transform.position.x, targetY, transform.position.z);
+
+        // Вместо Lerp лучше использовать MoveTowards или SmoothDamp для исключения "отставания"
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, followSpeed * Time.deltaTime);
+
     }
 }
 

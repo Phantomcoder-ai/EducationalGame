@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class HookController : MonoBehaviour
 {
@@ -8,11 +9,17 @@ public class HookController : MonoBehaviour
     public bool canMove = false;
     private bool isIntro = false;
     private bool isReelingIn = false;
+
+    public WordManager wordManager;
+    private GameObject fishInRange = null; // рыба под крючком (в зоне)
+    private GameObject caughtFish = null;   // пойманная рыба (прикреплена к крючку)
     // Потолок для крючка в режиме игры
 
     [Header("Ссылки")]
     public Transform beachPoint;
     public CameraController camControl;
+    public GameSceneController gameSceneController;
+
 
     public void OnCastAnimationFinished()
     {
@@ -33,11 +40,6 @@ public class HookController : MonoBehaviour
 
     void Update()
     {
-        /*// СТАРТ ИГРЫ: Нажимаем пробел на берегу
-        if (Input.GetKeyDown(KeyCode.Space)) //!isIntro && !canMove && !isReelingIn && 
-        {
-            StartFishing();
-        }*/
 
         // 1. АВТОМАТИЧЕСКИЙ СПУСК
         if (isIntro)
@@ -45,11 +47,11 @@ public class HookController : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position,
                 new Vector3(transform.position.x, -13f, 0), introFallSpeed * Time.deltaTime);
 
-            if (Mathf.Abs(transform.position.y - (-13f)) < 0.1f)
+            if (transform.position.y <= (-13f) + 0.01f)
             {
                 isIntro = false;
                 canMove = true; // Теперь игрок может управлять
-                camControl.currentState = CameraController.CameraState.LockedAtBottom; // Фиксируем камеру!
+                camControl.currentState = CameraController.CameraState.LockedAtBottom;
             }
             return;
         }
@@ -72,11 +74,18 @@ public class HookController : MonoBehaviour
             float cy = Mathf.Clamp(transform.position.y, minY, maxY);
             transform.position = new Vector3(cx, cy, 0);
 
-            // Если поймали рыбу (условно на пробел)
-            if (Input.GetKeyDown(KeyCode.Space))
+            // Захват рыбы — только по Enter, когда рыба в зоне
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
             {
-                // Тут должна быть проверка коллайдера рыбы, как в прошлом шаге
-                StartReeling();
+                if (fishInRange != null && caughtFish == null)
+                {
+                    AttachFish(fishInRange);
+                    StartReeling();
+                }
+                else
+                {
+                    Debug.Log("Нет рыбы под крючком.");
+                }
             }
         }
 
@@ -84,14 +93,89 @@ public class HookController : MonoBehaviour
         if (isReelingIn)
         {
             transform.position = Vector3.MoveTowards(transform.position, beachPoint.position, introFallSpeed * Time.deltaTime);
+            if (camControl.currentState != CameraController.CameraState.FollowingHook)
+            {
+                camControl.currentState = CameraController.CameraState.FollowingHook;
+            }
+
             if (Vector3.Distance(transform.position, beachPoint.position) < 0.1f)
             {
                 isReelingIn = false;
                 camControl.currentState = CameraController.CameraState.AtBeach;
+
+                // Обработка пойманной рыбы: удаляем / или можно передать в менеджер
+                if (caughtFish != null)
+                {
+                    // 1. Пытаемся достать данные о букве из рыбы
+                    // (Предположим, у тебя на рыбе висит скрипт FishData с полем assignedLetter)
+                    var data = caughtFish.GetComponent<FishLetter>();
+                    if (data != null)
+                    {
+                        Debug.Log("Поймана буква: " + data.assignedLetter);
+                        wordManager.AddLetter(data.assignedLetter);
+                    }
+                    else
+                    {
+                        Debug.LogError("ОШИБКА: На рыбе не найден компонент FishData!");
+                    }
+                    Destroy(caughtFish);
+                    caughtFish = null;
+                }
+                // Включаем аниматор обратно для следующего заброса
+                Animator anim = GetComponent<Animator>();
+                if (anim != null) anim.enabled = true;
+                Debug.Log("Аниматор включен.");
+
+                // Сигналим контроллеру сцены, что можно снова нажать пробел
+                if (gameSceneController != null)
+                {
+                    gameSceneController.ResetFishingStatus();
+                }
             }
         }
     }
 
+    // Фиксируем рыбу в зоне крючка — но не приклеиваем!
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // Ищем компонент движения рыбы в родителе/самом объекте
+        var fishMove = other.GetComponentInParent<FishMovement>();
+        if (fishMove != null)
+        {
+            fishInRange = fishMove.gameObject;
+            Debug.Log("Рыба в зоне крючка. Нажми Enter, чтобы поймать.");
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        var fishMove = other.GetComponentInParent<FishMovement>();
+        if (fishMove != null && fishInRange == fishMove.gameObject)
+        {
+            fishInRange = null;
+            Debug.Log("Рыба покинула зону крючка.");
+        }
+    }
+
+    // Приклеиваем рыбу к крючку (вызывается при нажатии Enter)
+    private void AttachFish(GameObject fish)
+    {
+        if (fish == null) return;
+
+        caughtFish = fish;
+        caughtFish.transform.SetParent(transform);
+        // Подстройте локальную позицию по нужному смещению (пример)
+        caughtFish.transform.localPosition = new Vector3(0, -0.7f, 0);
+
+        // Выключаем движение рыбы
+        FishMovement fm = caughtFish.GetComponent<FishMovement>();
+        if (fm != null) fm.enabled = false;
+
+        // Сбрасываем флаг зоны (мы уже поймали эту рыбу)
+        if (fishInRange == caughtFish) fishInRange = null;
+
+        Debug.Log("Рыба прикреплена к крючку.");
+    }
     void StartReeling()
     {
         canMove = false;
@@ -99,68 +183,3 @@ public class HookController : MonoBehaviour
         camControl.currentState = CameraController.CameraState.FollowingHook; // Камера снова едет за крючком
     }
 }
-
-// В месте, где ты готовишься к новому забросу:
-//GetComponent<Animator>().enabled = true;
-
-/*using UnityEngine;
-
-public class HookController : MonoBehaviour
-{
-    public float speed = 5f;
-    public float introFallSpeed = 3f; // Скорость падения в начале
-    public bool canMove = false;
-    public bool isIntro = true;      // Флаг начальной анимации
-
-    [Header("Точки и Границы")]
-    public Transform beachPoint;     // Стартовая точка (у рыбака)
-    public float bottomY = -12f;     // Глубина, где остановится спуск
-
-    private bool isReelingIn = false;
-
-    void Update()
-    {
-        // 1. АВТОМАТИЧЕСКИЙ СПУСК В НАЧАЛЕ
-        if (isIntro)
-        {
-            transform.position = Vector3.MoveTowards(transform.position,
-                new Vector3(transform.position.x, bottomY, 0), introFallSpeed * Time.deltaTime);
-
-            // Если достигли дна — выключаем интро и даем управление
-            if (Mathf.Abs(transform.position.y - bottomY) < 0.1f)
-            {
-                isIntro = false;
-                canMove = true;
-            }
-            return;
-        }
-
-        // 2. ВОЗВРАТ НАВЕРХ (после поимки)
-        if (isReelingIn)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, beachPoint.position, speed * Time.deltaTime);
-            if (Vector3.Distance(transform.position, beachPoint.position) < 0.1f)
-            {
-                isReelingIn = false;
-                // Здесь можно вызвать событие "Рыба поймана!"
-            }
-            return;
-        }
-
-        // 3. ОБЫЧНОЕ УПРАВЛЕНИЕ WASD (код из прошлых шагов)
-        if (canMove)
-        {
-            float moveX = Input.GetAxis("Horizontal");
-            float moveY = Input.GetAxis("Vertical");
-            transform.position += new Vector3(moveX, moveY, 0) * speed * Time.deltaTime;
-            // Не забудь здесь Clamp (ограничение движения), чтобы не уплыть за экран
-        }
-    }
-
-    // Эту функцию вызываем, когда рыба поймана (через пробел)
-    public void StartReeling()
-    {
-        canMove = false;
-        isReelingIn = true;
-    }
-}*/
