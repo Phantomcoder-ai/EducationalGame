@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0012, y: 0.0027}
-  m_SizeDelta: {x: 0.486, y: 0.761}
+  m_AnchoredPosition: {x: 0.0000000074506, y: -0.0000005886}
+  m_SizeDelta: {x: 0.6639, y: 0.9958}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4610712441659398686
 CanvasRenderer:
@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -92,12 +92,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.8
+  m_fontSize: 1
   m_fontSizeBase: 3
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0.04
-  m_fontSizeMax: 3
+  m_fontSizeMax: 10
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -264,8 +264,8 @@ Transform:
   m_GameObject: {fileID: 8070148761765625067}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.857, y: -0.574, z: 0}
-  m_LocalScale: {x: 0.89530003, y: 0.45771, z: 0}
+  m_LocalPosition: {x: -0.905, y: -0.561, z: 0}
+  m_LocalScale: {x: 0.98805314, y: 0.56843, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 367430957907754380}
@@ -338,8 +338,8 @@ GameObject:
   - component: {fileID: 2884428726901173233}
   - component: {fileID: 3903246987452344945}
   m_Layer: 0
-  m_Name: Fish
-  m_TagString: Untagged
+  m_Name: Fish_B
+  m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -374,8 +374,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  leftLimit: -8
-  rightLimit: 8
+  minX: -13
+  maxX: 13
+  minY: -16.5
+  maxY: -7.5
+  movingRight: 1
   fishBodySprite: {fileID: 4093448980004317519}
   leafTransform: {fileID: 5434229355347677242}
 --- !u!114 &3903246987452344945
@@ -405,7 +408,7 @@ GameObject:
   - component: {fileID: 7306942335557790749}
   m_Layer: 0
   m_Name: FishBody
-  m_TagString: Fish
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -419,8 +422,8 @@ Transform:
   m_GameObject: {fileID: 8737864840425595644}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.337, y: -0.556, z: 0}
-  m_LocalScale: {x: 1.5, y: 0.3, z: 0}
+  m_LocalPosition: {x: 0.512, y: -0.555, z: 0}
+  m_LocalScale: {x: 1.8434999, y: 0.43104002, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6002585676132552695}
@@ -470,7 +473,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 30
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.34901962, g: 0.34901962, b: 0.34901962, a: 1}
+  m_Color: {r: 1, g: 0.5330188, b: 0.5330188, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

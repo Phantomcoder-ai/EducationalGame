@@ -1,16 +1,16 @@
-using UnityEngine;
+п»їusing UnityEngine;
 
 public class FishingLine : MonoBehaviour
 {
     private LineRenderer lineRenderer;
-    public Transform fishermanTip; // Точка на кончике удочки рыбака
-    public Transform hookPoint;      // Точка на самом крючке (можно указать сам Hook)
+    public Transform fishermanTip; // РўРѕС‡РєР° РЅР° РєРѕРЅС‡РёРєРµ СѓРґРѕС‡РєРё СЂС‹Р±Р°РєР°
+    public Transform hookPoint;      // РўРѕС‡РєР° РЅР° СЃР°РјРѕРј РєСЂСЋС‡РєРµ (РјРѕР¶РЅРѕ СѓРєР°Р·Р°С‚СЊ СЃР°Рј Hook)
 
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
 
-        // Указываем, что у линии всего 2 точки (начало и конец)
+        // РЈРєР°Р·С‹РІР°РµРј, С‡С‚Рѕ Сѓ Р»РёРЅРёРё РІСЃРµРіРѕ 2 С‚РѕС‡РєРё (РЅР°С‡Р°Р»Рѕ Рё РєРѕРЅРµС†)
         lineRenderer.positionCount = 2;
     }
 
@@ -18,10 +18,10 @@ public class FishingLine : MonoBehaviour
     {
         if (fishermanTip != null && hookPoint != null)
         {
-            // Точка 0 — это удочка
+            // РўРѕС‡РєР° 0 вЂ” СЌС‚Рѕ СѓРґРѕС‡РєР°
             lineRenderer.SetPosition(0, fishermanTip.position);
 
-            // Точка 1 — это крючок
+            // РўРѕС‡РєР° 1 вЂ” СЌС‚Рѕ РєСЂСЋС‡РѕРє
             lineRenderer.SetPosition(1, hookPoint.position);
         }
     }

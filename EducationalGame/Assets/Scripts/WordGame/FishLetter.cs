@@ -1,10 +1,10 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using TMPro;
 
 public class FishLetter : MonoBehaviour
 {
-    public TextMeshProUGUI tmpText; // Ссылка на текст внутри листка
-    public string assignedLetter;    // Какая буква назначена этой рыбе
+    public TextMeshProUGUI tmpText; // РЎСЃС‹Р»РєР° РЅР° С‚РµРєСЃС‚ РІРЅСѓС‚СЂРё Р»РёСЃС‚РєР°
+    public string assignedLetter;    // РљР°РєР°СЏ Р±СѓРєРІР° РЅР°Р·РЅР°С‡РµРЅР° СЌС‚РѕР№ СЂС‹Р±Рµ
 
     public void SetupLetter(string letter)
     {
