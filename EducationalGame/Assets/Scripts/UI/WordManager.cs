@@ -14,7 +14,7 @@ public class WordManager : MonoBehaviour
         UpdateUI();
     }
 
-    public void AddLetter(string letter)
+    public bool AddLetter(string letter)
     {
         // Проверяем, совпадает ли буква с текущей нужной в слове
         if (currentProgress < targetWord.Length &&
@@ -22,10 +22,12 @@ public class WordManager : MonoBehaviour
         {
             currentProgress++;
             UpdateUI();
+            return true;
             Debug.Log("Буква верная! Прогресс: " + currentProgress);
         }
         else
         {
+            return false;
             Debug.Log("Не та буква. Нужно: " + targetWord[currentProgress]);
         }
     }

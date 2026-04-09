@@ -5,6 +5,12 @@ public class FishManager : MonoBehaviour
     public GameObject fishPrefab; // Ссылка на префаб Fish_Complete
     public string targetWord = "МАМА";
 
+
+    [Header("Настройки сложности")]
+    public int extraFishCount = 10; // Сколько лишних рыб добавить
+    public string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+
     [Header("Зона появления")]
     public float spawnMinX = -6f;
     public float spawnMaxX = 6f;
@@ -13,34 +19,49 @@ public class FishManager : MonoBehaviour
 
     void Start()
     {
-        SpawnFishForWord();
+        SpawnAllFish();
     }
 
-    void SpawnFishForWord()
+    void SpawnAllFish()
     {
+        // 1. Создаем обязательные рыбы для слова
         for (int i = 0; i < targetWord.Length; i++)
         {
-            Vector3 randomPos = new Vector3(
-                Random.Range(spawnMinX, spawnMaxX),
-                Random.Range(spawnMinY, spawnMaxY),
-                0
-            );
+            CreateFish(targetWord[i].ToString());
+        }
 
-            GameObject newFish = Instantiate(fishPrefab, randomPos, Quaternion.identity);
+        // 2. Создаем случайные рыбы ("обманки")
+        for (int i = 0; i < extraFishCount; i++)
+        {
+            char randomChar = alphabet[Random.Range(0, alphabet.Length)];
+            CreateFish(randomChar.ToString());
+        }
+    }
 
-            // Используем новый скрипт для установки буквы
-            FishLetter fishLetterScript = newFish.GetComponent<FishLetter>();
-            if (fishLetterScript != null)
-            {
-                fishLetterScript.SetupLetter(targetWord[i].ToString());
-            }
+    void CreateFish(string letter)
+    {
+        Vector3 randomPos = new Vector3(
+            Random.Range(spawnMinX, spawnMaxX),
+            Random.Range(spawnMinY, spawnMaxY),
+            0
+        );
 
-            // Случайная скорость
-            FishMovement movement = newFish.GetComponent<FishMovement>();
-            if (movement != null)
-            {
-                movement.speed = Random.Range(1.5f, 3.5f);
-            }
+        GameObject newFish = Instantiate(fishPrefab, randomPos, Quaternion.identity);
+
+        // Устанавливаем букву
+        FishLetter fishLetterScript = newFish.GetComponentInChildren<FishLetter>();
+        if (fishLetterScript != null)
+        {
+            fishLetterScript.SetupLetter(letter);
+        }
+
+        // Устанавливаем случайную скорость и направление
+        FishMovement movement = newFish.GetComponent<FishMovement>();
+        if (movement != null)
+        {
+            movement.speed = Random.Range(1.5f, 3.5f);
+            // Чтобы рыбы не плыли все в одну сторону в начале
+            movement.movingRight = (Random.value > 0.5f);
         }
     }
 }

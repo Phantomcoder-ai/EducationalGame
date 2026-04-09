@@ -7,7 +7,7 @@ public class FishMovement : MonoBehaviour
     public float leftLimit = -8f;
     public float rightLimit = 8f;
 
-    private bool movingRight = true;
+    public bool movingRight = true;
     public SpriteRenderer fishBodySprite; // —сылка на спрайт “≈Ћј рыбы
     public Transform leafTransform;      // —сылка на “–јЌ—‘ќ–ћ листка
 

@@ -112,13 +112,18 @@ public class HookController : MonoBehaviour
                     if (data != null)
                     {
                         Debug.Log("Поймана буква: " + data.assignedLetter);
-                        wordManager.AddLetter(data.assignedLetter);
+                        bool isCorrect = wordManager.AddLetter(data.assignedLetter);
+                        if (isCorrect)
+                        {
+                            // Если верно — удаляем рыбу
+                            Destroy(caughtFish);
+                        }
+                        else
+                        {
+                            // Если НЕВЕРНО — возвращаем в воду
+                            ReleaseFishBackToWater();
+                        }
                     }
-                    else
-                    {
-                        Debug.LogError("ОШИБКА: На рыбе не найден компонент FishData!");
-                    }
-                    Destroy(caughtFish);
                     caughtFish = null;
                 }
                 // Включаем аниматор обратно для следующего заброса
@@ -134,6 +139,22 @@ public class HookController : MonoBehaviour
             }
         }
     }
+
+    void ReleaseFishBackToWater()
+    {
+        caughtFish.transform.SetParent(null); // Отцепляем от крючка
+
+        // Возвращаем рыбе случайную глубину, чтобы она не плавала у поверхности
+        float randomY = Random.Range(-15f, -8f);
+        caughtFish.transform.position = new Vector3(transform.position.x, randomY, 0);
+
+        // Включаем скрипт движения обратно
+        var fm = caughtFish.GetComponent<FishMovement>();
+        if (fm != null) fm.enabled = true;
+
+        Debug.Log("Буква не та! Рыба возвращена в море.");
+    }
+
 
     // Фиксируем рыбу в зоне крючка — но не приклеиваем!
     void OnTriggerEnter2D(Collider2D other)
