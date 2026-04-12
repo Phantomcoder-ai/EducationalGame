@@ -7,6 +7,9 @@ public class WordManager : MonoBehaviour
     [Header("Ссылка на спавнер")]
     public FishManager fishManager; // Перетащи FishManager сюда в инспекторе
 
+    [Header("Настройки сложности")]
+    public int wordsBeforeShark = 2; // Акула появится после 2-го слова
+
     public string[] wordList = { "MAMA", "KUTASIK", "EPSZTEJN", "URAN", "MADURA", "STOJAKRONALDU" }; // Список слов для игры
     private int currentWordIndex = 0;
 
@@ -60,8 +63,17 @@ public class WordManager : MonoBehaviour
             string nextWord = GetCurrentWord();
             Debug.Log("Следующее слово: " + nextWord);
              UpdateUI();
+            if(fishManager != null)
+            {
+                fishManager.RefreshFishForNewWord(nextWord);
 
-            fishManager.RefreshFishForNewWord(nextWord);
+                // ПРОВЕРКА: Пора ли выпускать акулу?
+                if (currentWordIndex >= wordsBeforeShark)
+                {
+                    fishManager.SpawnShark();
+                }
+            }
+            
         }
         else
         {

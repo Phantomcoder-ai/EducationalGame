@@ -167,12 +167,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 15000, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -330,10 +330,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 395029198}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 245.35, y: -77.035}
-  m_SizeDelta: {x: 450.7, y: 134.07}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &286612320
 MonoBehaviour:
@@ -473,7 +473,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 50, y: -300}
-  m_SizeDelta: {x: 239.54, y: 154.07}
+  m_SizeDelta: {x: 239.54, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &323136332
 MonoBehaviour:
@@ -648,7 +648,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 50, y: 140}
-  m_SizeDelta: {x: 490.7, y: 154.07}
+  m_SizeDelta: {x: 490.7, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &395029199
 MonoBehaviour:
@@ -929,8 +929,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4288752896
-  m_fontColor: {r: 0, g: 0.17515087, b: 0.6320754, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -985,7 +985,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -349.82788, y: -150.55615, z: -349.8274, w: -150.25085}
+  m_margin: {x: -1.1425476, y: -150.55615, z: -1.1421814, w: -150.25085}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1017,7 +1017,7 @@ GameObject:
   - component: {fileID: 639635311}
   m_Layer: 0
   m_Name: Hook
-  m_TagString: Untagged
+  m_TagString: Hook
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1131,7 +1131,7 @@ MonoBehaviour:
   canMove: 0
   wordManager: {fileID: 1943990159}
   beachPoint: {fileID: 1526303424}
-  camControl: {fileID: 1427067049}
+  camControl: {fileID: 1720392280}
   gameSceneController: {fileID: 1027585559}
 --- !u!114 &639635308
 MonoBehaviour:
@@ -1482,7 +1482,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &985679008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1608,7 +1608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bca766a9db05234ba183d6826966061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraController: {fileID: 1427067049}
+  cameraController: {fileID: 1720392280}
   hookController: {fileID: 639635307}
   fishermanAnimator: {fileID: 639635306}
 --- !u!4 &1027585560
@@ -1692,8 +1692,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2969567232
-  m_fontColor: {r: 0, g: 0, b: 0, a: 0.69411767}
+    rgba: 2516582400
+  m_fontColor: {r: 0, g: 0, b: 0, a: 0.5882353}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1794,6 +1794,7 @@ MonoBehaviour:
   fishPrefabs:
   - {fileID: 8690786391197387751, guid: 272df26f8b20c1e4386ef5b3f16240aa, type: 3}
   - {fileID: 8690786391197387751, guid: 5a5a3753a28a1ae4d9e43da2c1966675, type: 3}
+  sharkPrefab: {fileID: 544052312838638481, guid: a660870a96811ae48ac11a7b6e4f6528, type: 3}
   targetWord: MAMA
   extraFishCount: 10
   alphabet: ABCDEFGHIJKLMNOPQRSTUVWXYZ
@@ -1877,12 +1878,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 20
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.4575472, g: 0.5918438, b: 1, a: 1}
+  m_Sprite: {fileID: 4445528089980358180, guid: f2e8ddc22b456754bacbff1254be17d1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 52.51282, y: 35}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1897,8 +1898,8 @@ Transform:
   m_GameObject: {fileID: 1167213708}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.33, y: -9.4237, z: 0}
-  m_LocalScale: {x: 20, y: 16.729969, z: 1}
+  m_LocalPosition: {x: 0.48, y: -9.18, z: 0}
+  m_LocalScale: {x: 0.5604411, y: 0.46553794, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1949,7 +1950,7 @@ GameObject:
   - component: {fileID: 1427067049}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2022,11 +2023,11 @@ Transform:
   m_GameObject: {fileID: 1427067044}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1720392281}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1427067048
 MonoBehaviour:
@@ -2081,16 +2082,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1427067044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f08363291c6bce47ae45f78933e7729, type: 3}
+  m_Script: {fileID: 11500000, guid: 210ec52626f86944b97e7bd3b7e6fcde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beachPoint: {fileID: 1526303424}
-  hook: {fileID: 639635305}
-  followSpeed: 5
-  minY: -12
-  maxY: 5
-  currentState: 0
-  smoothTime: 0.15
 --- !u!1 &1526303422
 GameObject:
   m_ObjectHideFlags: 0
@@ -2152,12 +2146,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5564843, g: 1, b: 0.2971698, a: 1}
+  m_Sprite: {fileID: 4445528089980358180, guid: f2e8ddc22b456754bacbff1254be17d1, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 52.51282, y: 35}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2172,10 +2166,62 @@ Transform:
   m_GameObject: {fileID: 1526303422}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.34, y: 4.5729, z: 0}
-  m_LocalScale: {x: 20, y: 11.239201, z: 1}
+  m_LocalPosition: {x: 0.2691, y: 4.928, z: 0}
+  m_LocalScale: {x: 0.38240403, y: 0.33883774, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1720392279
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1720392281}
+  - component: {fileID: 1720392280}
+  m_Layer: 0
+  m_Name: CameraParent
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1720392280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720392279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f08363291c6bce47ae45f78933e7729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beachPoint: {fileID: 1526303424}
+  hook: {fileID: 639635305}
+  followSpeed: 5
+  minY: -12
+  maxY: 5
+  currentState: 0
+  smoothTime: 0.15
+--- !u!4 &1720392281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720392279}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1427067047}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1741066077
@@ -2275,10 +2321,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 323136331}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 119.77, y: -77.035}
-  m_SizeDelta: {x: 199.54, y: 134.07}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1775409975
 MonoBehaviour:
@@ -2411,10 +2457,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1818459861}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 213.955, y: -77.035}
-  m_SizeDelta: {x: 387.91, y: 134.07}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1801297579
 MonoBehaviour:
@@ -2554,7 +2600,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 50, y: -80}
-  m_SizeDelta: {x: 427.91, y: 154.07}
+  m_SizeDelta: {x: 427.91, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1818459862
 MonoBehaviour:
@@ -2742,7 +2788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 0.39215687}
+  m_Color: {r: 0, g: 0.6293888, b: 1, a: 0.2627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2885,6 +2931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishManager: {fileID: 1159666049}
+  wordsBeforeShark: 1
   wordList:
   - A
   - B
@@ -2913,7 +2960,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1427067047}
+  - {fileID: 1720392281}
   - {fileID: 1908508940}
   - {fileID: 639635305}
   - {fileID: 1526303424}

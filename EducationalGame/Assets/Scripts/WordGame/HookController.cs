@@ -197,6 +197,29 @@ public class HookController : MonoBehaviour
 
         Debug.Log("Рыба прикреплена к крючку.");
     }
+
+    public void ForceReturn()
+    {
+        isReelingIn = true;
+        // 2. Если на крючке в этот момент была рыба — её нужно отцепить (съела акула)
+        // Предположим, рыба становится ребенком крючка при поимке:
+        if (transform.childCount > 0)
+        {
+            foreach (Transform child in transform)
+            {
+                // Если это рыба, уничтожаем её или отцепляем
+                if (child.CompareTag("Fish"))
+                {
+                    Destroy(child.gameObject);
+                    Debug.Log("Акула заставила бросить рыбу!");
+                }
+            }
+        }
+
+        // 3. Можно добавить визуальный эффект (например, крючок дергается)
+        Debug.Log("Крючок принудительно возвращается вверх!");
+    }
+
     void StartReeling()
     {
         canMove = false;
