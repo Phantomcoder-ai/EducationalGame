@@ -40,7 +40,7 @@ public class HookController : MonoBehaviour
 
     void Update()
     {
-
+        UpdateVisualDirection();
         // 1. АВТОМАТИЧЕСКИЙ СПУСК
         if (isIntro)
         {
@@ -218,6 +218,26 @@ public class HookController : MonoBehaviour
 
         // 3. Можно добавить визуальный эффект (например, крючок дергается)
         Debug.Log("Крючок принудительно возвращается вверх!");
+    }
+
+    void UpdateVisualDirection()
+    {
+        // 1. Получаем ввод игрока (-1 для "влево", 1 для "вправо", 0 если не жмем)
+        float moveX = Input.GetAxisRaw("Horizontal");
+
+        // 2. Если кнопка нажата (moveX не равен 0)
+        if (moveX != 0)
+        {
+            // Берем текущий масштаб объекта
+            Vector3 newScale = transform.localScale;
+
+            // Устанавливаем масштаб по X: 
+            // Берем базовый размер (Mathf.Abs) и умножаем на направление (1 или -1)
+            newScale.x = Mathf.Abs(newScale.x) * Mathf.Sign(moveX);
+
+            // Применяем новый масштаб к объекту
+            transform.localScale = newScale;
+        }
     }
 
     void StartReeling()
