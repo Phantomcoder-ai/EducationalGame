@@ -6,6 +6,7 @@ public class SharkMovement : MonoBehaviour
     [Header("Настройки движения")]
     public float speed = 5f; // Акула по умолчанию быстрее рыб
     public bool movingRight = true;
+    private bool isStunned = false;
 
     // Твои границы (как у рыб)
     public float minX = -13f;
@@ -24,7 +25,7 @@ public class SharkMovement : MonoBehaviour
 
     void Update()
     {
-        if (isWaiting) return;
+        if (isWaiting || isStunned) return;
 
         // Движение акулы
         float direction = movingRight ? 1f : -1f;
@@ -72,7 +73,6 @@ public class SharkMovement : MonoBehaviour
             {
                 CameraShake.Instance.Shake(0.3f, 0.4f);
             }
-
             HookController hook = other.GetComponent<HookController>();
             // 2. Заставляем крючок подняться
             if (hook != null)
@@ -80,6 +80,24 @@ public class SharkMovement : MonoBehaviour
                 hook.ForceReturn(); // Отпускаем рыбу обратно в воду
                 //HealthManager.Instance.TakeDamage(1); // Уменьшаем здоровье на 1
             }
+            
+            
+            StartCoroutine(StunShark());
         }
     }
+    IEnumerator StunShark()
+    {
+        isStunned = true; // Останавливаем движение в Update
+        
+        // Выбираем случайное время паузы (например, от 0.5 до 1.5 секунд)
+        float pauseTime = Random.Range(0.5f, 1.5f);
+        yield return new WaitForSeconds(pauseTime);
+
+        // Разворачиваемся
+        movingRight = !movingRight;
+        UpdateFacing();
+
+        isStunned = false; // Снова разрешаем движение
+    }
+
 }

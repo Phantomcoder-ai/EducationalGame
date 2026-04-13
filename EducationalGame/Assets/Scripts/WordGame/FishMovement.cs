@@ -6,6 +6,9 @@ public class FishMovement : MonoBehaviour
 {
     [Header("Настройки движения")]
     public float speed = 2f;
+    public float panicMultiplier = 3f;
+    public float originalSpeed; // Для сохранения базовой скорости
+
     public float minX = -13f;
     public float maxX = 13f;
     public float minY = -16.5f;
@@ -23,6 +26,9 @@ public class FishMovement : MonoBehaviour
         // Случайно выбираем начальное направление
         movingRight = Random.value > 0.5f;
         UpdateFacing();
+
+        // Сохраняем исходную скорость
+        originalSpeed = speed;
     }
 
     void Update()
@@ -85,6 +91,20 @@ public class FishMovement : MonoBehaviour
             // Если плывем влево, листок должен быть справа от центра (сзади)
             float xOffset = movingRight ? -1.2f : 2.2f; // Настрой это число под свою рыбу
             leafTransform.localPosition = new Vector3(xOffset, leafPos.y, leafPos.z);
+        }
+    }
+    public void SetPanic(bool panic)
+    {
+        if (panic)
+        {
+            speed = originalSpeed * panicMultiplier;
+            // Можно добавить визуальный эффект, например, рыба краснеет от страха
+           // if (fishBodySprite != null) fishBodySprite.color = Color.red;
+        }
+        else
+        {
+            speed = originalSpeed;
+            //if (fishBodySprite != null) fishBodySprite.color = Color.white;
         }
     }
 }

@@ -84,27 +84,18 @@ public class FishManager : MonoBehaviour
         SpawnAllFish();
     }
 
-//..................................................................................
+    //..................................................................................
     //SHARK
     public void SpawnShark()
     {
         if (activeShark != null) return; // Акула уже есть
-    
+
         Vector3 spawnPos = new Vector3(
             Random.Range(spawnMinX, spawnMaxX),
             Random.Range(spawnMinY, spawnMaxY),
             0
         );
-        activeShark = Instantiate(sharkPrefab, spawnPos, Quaternion.identity);
-        SetFishesSpeed(1.5f); // Увеличиваем скорость рыб, когда появляется акула   
-    }
-    public void SetFishesSpeed(float multiplier)
-    {
-        FishMovement[] allFishes = Object.FindObjectsByType<FishMovement>(FindObjectsSortMode.None);
-        foreach (FishMovement f in allFishes)
-        {
-            f.speed *= multiplier;
-        }
+        activeShark = Instantiate(sharkPrefab, spawnPos, Quaternion.identity);  
     }
 
 

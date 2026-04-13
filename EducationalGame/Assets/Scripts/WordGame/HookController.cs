@@ -200,7 +200,7 @@ public class HookController : MonoBehaviour
 
     public void ForceReturn()
     {
-        isReelingIn = true;
+        StartReeling();
         // 2. Если на крючке в этот момент была рыба — её нужно отцепить (съела акула)
         // Предположим, рыба становится ребенком крючка при поимке:
         if (transform.childCount > 0)

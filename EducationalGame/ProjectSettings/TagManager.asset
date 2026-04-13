@@ -6,14 +6,16 @@ TagManager:
   tags:
   - Fish
   - Hook
+  - Shark
+  - ScareZone
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - IgnoreHook
   - Water
   - UI
-  - 
+  - Hook
   - 
   - 
   - 
