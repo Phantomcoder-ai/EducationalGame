@@ -5,7 +5,7 @@ public class SharkMovement : MonoBehaviour
 {
     [Header("Настройки движения")]
     public float speed = 5f; // Акула по умолчанию быстрее рыб
-    public bool movingRight = true;
+    private bool movingRight = true;
     private bool isStunned = false;
 
     // Твои границы (как у рыб)
@@ -16,10 +16,12 @@ public class SharkMovement : MonoBehaviour
 
     private bool isWaiting = false;
     private SpriteRenderer sprite;
-
+    private SpriteRenderer[] renderers;
     void Start()
     {
         sprite = GetComponentInChildren<SpriteRenderer>();
+        renderers = GetComponentsInChildren<SpriteRenderer>();
+        SetRandomSideAndDirection();
         UpdateFacing();
     }
 
@@ -32,26 +34,25 @@ public class SharkMovement : MonoBehaviour
         transform.Translate(Vector2.right * direction * speed * Time.deltaTime);
 
         // Проверка границ и респаун
-        if (movingRight && transform.position.x >= maxX)
-            StartCoroutine(RespawnShark(minX));
-        else if (!movingRight && transform.position.x <= minX)
-            StartCoroutine(RespawnShark(maxX));
+        if ((movingRight && transform.position.x >= maxX + 2f) || // Добавили отступ за экран
+            (!movingRight && transform.position.x <= minX - 2f))
+        {
+            StartCoroutine(RespawnShark()); // Теперь просто респаун
+        }
     }
 
-    IEnumerator RespawnShark(float spawnX)
+    IEnumerator RespawnShark()
     {
         isWaiting = true;
 
         // Прячем акулу (включая все части)
-        SpriteRenderer[] renderers = GetComponentsInChildren<SpriteRenderer>();
         foreach (var r in renderers) r.enabled = false;
 
         // Пауза перед новым появлением (акула появляется внезапно)
         yield return new WaitForSeconds(Random.Range(2f, 5f));
 
-        // Новая позиция
-        float randomY = Random.Range(minY, maxY);
-        transform.position = new Vector3(spawnX, randomY, transform.position.z);
+        // ВЫБИРАЕМ НОВУЮ СТОРОНУ И ГЛУБИНУ
+        SetRandomSideAndDirection();
 
         // Показываем обратно
         foreach (var r in renderers) r.enabled = true;
@@ -59,9 +60,33 @@ public class SharkMovement : MonoBehaviour
         isWaiting = false;
     }
 
+    void SetRandomSideAndDirection()
+    {
+        // 1. Выбираем случайную сторону: true - слева, false - справа
+        bool spawnFromLeft = Random.Range(0, 2) == 0;
+
+        // 2. Устанавливаем позицию появления за границей экрана
+        // Добавляем отступ, чтобы она выплывала плавно
+        float spawnX = spawnFromLeft ? minX - 1f : maxX + 1f;
+        float randomY = Random.Range(minY, maxY);
+        transform.position = new Vector3(spawnX, randomY, transform.position.z);
+
+        // 3. Устанавливаем направление движения:
+        // Если появилась слева, плывем вправо, и наоборот
+        movingRight = spawnFromLeft;
+
+        // 4. Обновляем визуальный поворот
+        UpdateFacing();
+    }
+
     void UpdateFacing()
     {
-        if (sprite != null) sprite.flipX = !movingRight;
+        if (sprite != null)
+        {
+            // flipX = true, если плывем ВЛЕВО (false)
+            // flipX = false, если плывем ВПРАВО (true)
+            sprite.flipX = !movingRight;
+        }
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

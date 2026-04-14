@@ -74,9 +74,19 @@ public class FishManager : MonoBehaviour
     public void RefreshFishForNewWord(string newWord)
     {
         GameObject[] oldFish = GameObject.FindGameObjectsWithTag("Fish");
+        var destroyed = new System.Collections.Generic.HashSet<GameObject>();
+
         foreach (GameObject fish in oldFish)
         {
-            if(fish.transform.parent == null) Destroy(fish);
+            // Берём корневой объект (тот, что был инстанцирован)
+            GameObject root = fish.transform.root.gameObject;
+
+            // Уничтожаем каждый корень один раз
+            if (!destroyed.Contains(root))
+            {
+                Destroy(root);
+                destroyed.Add(root);
+            }
         }
 
         targetWord = newWord;

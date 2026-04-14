@@ -59,10 +59,10 @@ public class HookController : MonoBehaviour
         // 2. СВОБОДНАЯ ИГРА (WASD)
         if (canMove)
         {
-            float minX = -8.7f;
-            float maxX = 8.7f;
-            float minY = -17f; // Дно для крючка (может быть глубже, чем камера)
-            float maxY = -7.5f;
+            float minX = -8f;
+            float maxX = 8f;
+            float minY = -16.5f; // Дно для крючка (может быть глубже, чем камера)
+            float maxY = -7f;
             float moveX = Input.GetAxis("Horizontal");
             float moveY = Input.GetAxis("Vertical");
 
@@ -185,9 +185,12 @@ public class HookController : MonoBehaviour
 
         caughtFish = fish;
         caughtFish.transform.SetParent(transform);
-        // Подстройте локальную позицию по нужному смещению (пример)
-        caughtFish.transform.localPosition = new Vector3(0, -0.7f, 0);
 
+        caughtFish.transform.localPosition = Vector3.zero;
+        // Подстройте локальную позицию по нужному смещению (пример)
+        //caughtFish.transform.localPosition = new Vector3(0, -0.7f, 0);
+
+        caughtFish.transform.localRotation = Quaternion.identity;
         // Выключаем движение рыбы
         FishMovement fm = caughtFish.GetComponent<FishMovement>();
         if (fm != null) fm.enabled = false;
