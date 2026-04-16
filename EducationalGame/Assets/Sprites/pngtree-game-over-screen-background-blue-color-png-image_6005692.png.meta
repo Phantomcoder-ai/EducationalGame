@@ -1,0 +1,1086 @@
+fileFormatVersion: 2
+guid: 329f1e30e72477642bdf06b59a4f5852
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3853215944328553816
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_0
+  - first:
+      213: -409268464103614972
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_1
+  - first:
+      213: 4610125003583123842
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_2
+  - first:
+      213: -2423491237960429912
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_3
+  - first:
+      213: 1574381785751001803
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_4
+  - first:
+      213: 5510649995073995098
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_5
+  - first:
+      213: -7354284444514733831
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_6
+  - first:
+      213: -1430433007268854794
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_7
+  - first:
+      213: 7714155123101060748
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_8
+  - first:
+      213: 5026934715464909840
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_9
+  - first:
+      213: -8243500850131251607
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_10
+  - first:
+      213: 4940805653563027143
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_11
+  - first:
+      213: 7745344591751771596
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_12
+  - first:
+      213: -8610233427624816945
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_13
+  - first:
+      213: -365242190766540815
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_14
+  - first:
+      213: -8399085546558404884
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_15
+  - first:
+      213: 4274950968717288053
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_16
+  - first:
+      213: -8401501411010134266
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_17
+  - first:
+      213: 8829656026774920501
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_18
+  - first:
+      213: 5399889139097026798
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_19
+  - first:
+      213: 7667150040464641934
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_20
+  - first:
+      213: 4789024906904399454
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_21
+  - first:
+      213: -3103864301486137506
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_22
+  - first:
+      213: -768160735319729525
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_23
+  - first:
+      213: -2660061736999451745
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_24
+  - first:
+      213: -89820453045606861
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_25
+  - first:
+      213: 1033898090400926276
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_26
+  - first:
+      213: -848629329775679357
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_27
+  - first:
+      213: 2880289565072638978
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_28
+  - first:
+      213: -2644275496694104444
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_29
+  - first:
+      213: -2705277488229614928
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_30
+  - first:
+      213: 3492270986277593167
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_31
+  - first:
+      213: 6199432597259408950
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_32
+  - first:
+      213: -8419853911100390017
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_33
+  - first:
+      213: 6587380722948488558
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_34
+  - first:
+      213: -3291470313581121422
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_35
+  - first:
+      213: -658276198130592701
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_36
+  - first:
+      213: 1076324919598008070
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_37
+  - first:
+      213: 8232424037677902665
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_38
+  - first:
+      213: -5077439853480649676
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_39
+  - first:
+      213: 5514769375464199398
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_40
+  - first:
+      213: 6816599277107715106
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_41
+  - first:
+      213: 6915582661706927043
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_42
+  - first:
+      213: 6898982953196283370
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_43
+  - first:
+      213: 26534452705278878
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_44
+  - first:
+      213: -2943368596534265789
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_45
+  - first:
+      213: 1317194740115963210
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_46
+  - first:
+      213: 1279630316264070488
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_47
+  - first:
+      213: 8358873851508465795
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_48
+  - first:
+      213: -100304522565650495
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_49
+  - first:
+      213: -3210942538491737459
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_50
+  - first:
+      213: 4350381669991579832
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_51
+  - first:
+      213: 9028043415937629851
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_52
+  - first:
+      213: -4299790052019916265
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_53
+  - first:
+      213: -6608075162223545570
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_54
+  - first:
+      213: -1926207729318624795
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_55
+  - first:
+      213: 877056607930165531
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_56
+  - first:
+      213: 354310664178771045
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_57
+  - first:
+      213: -6852366920893153280
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_58
+  - first:
+      213: -1690657702032279800
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_59
+  - first:
+      213: 949516407143557339
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_60
+  - first:
+      213: -5881335461576721081
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_61
+  - first:
+      213: -1237796874553153966
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_62
+  - first:
+      213: -8070423730438690625
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_63
+  - first:
+      213: -7388497532514177901
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_64
+  - first:
+      213: 1644818560210180729
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_65
+  - first:
+      213: -8880129289575912687
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_66
+  - first:
+      213: -3878649924073006543
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_67
+  - first:
+      213: 5427556641474005574
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_68
+  - first:
+      213: 5011900952266460490
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_69
+  - first:
+      213: -4755651918047947598
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_70
+  - first:
+      213: 7711588914049318090
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_71
+  - first:
+      213: 1218761179813554769
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_72
+  - first:
+      213: 1643395426863498167
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_73
+  - first:
+      213: -7022896213713231400
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_74
+  - first:
+      213: 6162222543657821201
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_75
+  - first:
+      213: 3124785563770782399
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_76
+  - first:
+      213: -8506449849130564482
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_77
+  - first:
+      213: -1004183590355795058
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_78
+  - first:
+      213: 8075663696565598331
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_79
+  - first:
+      213: 8284362189071736311
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_80
+  - first:
+      213: -4258724767060669087
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_81
+  - first:
+      213: -2557585839666536684
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_82
+  - first:
+      213: 689931603380809321
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_83
+  - first:
+      213: -12265771400037028
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_84
+  - first:
+      213: -6826110530469156232
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_85
+  - first:
+      213: 5492942967960366958
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_86
+  - first:
+      213: 6385454578659328725
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_87
+  - first:
+      213: -7900010143514730315
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_88
+  - first:
+      213: -7383683600431486879
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_89
+  - first:
+      213: 630323863046660097
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_90
+  - first:
+      213: -3787146472960552518
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_91
+  - first:
+      213: -193659171279750004
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_92
+  - first:
+      213: 6165959400528697571
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_93
+  - first:
+      213: -7427909384435797145
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_94
+  - first:
+      213: 6170076146670029823
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_95
+  - first:
+      213: -8964740454807791014
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_96
+  - first:
+      213: 1258780460188750963
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_97
+  - first:
+      213: 8997769035067063466
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_98
+  - first:
+      213: 6143560980128867924
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_99
+  - first:
+      213: -988929469642753652
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_100
+  - first:
+      213: -4576701892607272213
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_101
+  - first:
+      213: -6669747850464551909
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_102
+  - first:
+      213: -2027082737509448383
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_103
+  - first:
+      213: -1373176154378669648
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_104
+  - first:
+      213: -61666571424589198
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_105
+  - first:
+      213: -6181547987289809708
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_106
+  - first:
+      213: -4679926544128479263
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_107
+  - first:
+      213: -7401668363693456072
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_108
+  - first:
+      213: 6457241813677345371
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_109
+  - first:
+      213: 5605485863567692088
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_110
+  - first:
+      213: -3286834951269487187
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_111
+  - first:
+      213: -5600266471942218691
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_112
+  - first:
+      213: -3601927667097640369
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_113
+  - first:
+      213: 2705505252487381955
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_114
+  - first:
+      213: 1830511325941630134
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_115
+  - first:
+      213: -5448581949801262484
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_116
+  - first:
+      213: -470389944500693521
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_117
+  - first:
+      213: -1878060050744281264
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_118
+  - first:
+      213: 3462290056986103711
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_119
+  - first:
+      213: -7851134892807431535
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_120
+  - first:
+      213: 3162756578782553801
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_121
+  - first:
+      213: 8710059490291113759
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_122
+  - first:
+      213: 3438667923977805762
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_123
+  - first:
+      213: -4263198430580150387
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_124
+  - first:
+      213: 5146129994783522185
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_125
+  - first:
+      213: 8436076005980735932
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_126
+  - first:
+      213: 1429274164761236972
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_127
+  - first:
+      213: 5821132833498750156
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_128
+  - first:
+      213: -4794743708651014432
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_129
+  - first:
+      213: 5226063928957347475
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_130
+  - first:
+      213: 2870774375694538852
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_131
+  - first:
+      213: 3150739685197029117
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_132
+  - first:
+      213: 1516094540373192740
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_133
+  - first:
+      213: -6868663692005439080
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_134
+  - first:
+      213: 4120209200149170663
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_135
+  - first:
+      213: 3490784522475423198
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_136
+  - first:
+      213: -9004814078783532433
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_137
+  - first:
+      213: -5369276418007305402
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_138
+  - first:
+      213: -4512320037540912278
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_139
+  - first:
+      213: -3274500526222956920
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_140
+  - first:
+      213: -4582816989978290040
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_141
+  - first:
+      213: 3519510960294169722
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_142
+  - first:
+      213: -7054442275584062138
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_143
+  - first:
+      213: 1181747926429772241
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_144
+  - first:
+      213: -2688132133873456010
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_145
+  - first:
+      213: 2533685009577683237
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_146
+  - first:
+      213: -6869304587159974325
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_147
+  - first:
+      213: 2640757523400861025
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_148
+  - first:
+      213: -9039965229359589435
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_149
+  - first:
+      213: -2174868731035688792
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_150
+  - first:
+      213: 8392454864861922102
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_151
+  - first:
+      213: 710743733771418664
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_152
+  - first:
+      213: 4718571784852884216
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_153
+  - first:
+      213: -7740136003595021648
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_154
+  - first:
+      213: 2923646949659308068
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_155
+  - first:
+      213: 2173717894893089784
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_156
+  - first:
+      213: -7361516821469129297
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_157
+  - first:
+      213: 6360011450419706574
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_158
+  - first:
+      213: 6021282793118673776
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_159
+  - first:
+      213: 1025105461724670658
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_160
+  - first:
+      213: -2443102456869081197
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_161
+  - first:
+      213: 8598527069049856023
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_162
+  - first:
+      213: -5516433902280511015
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_163
+  - first:
+      213: 7074328335635000268
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_164
+  - first:
+      213: 1880074726759041110
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_165
+  - first:
+      213: 1437272151366487753
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_166
+  - first:
+      213: -4861999437372351571
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_167
+  - first:
+      213: 4406840429971010716
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_168
+  - first:
+      213: 4186188945108422455
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_169
+  - first:
+      213: 4306972295066272652
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_170
+  - first:
+      213: -4066751265826784841
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_171
+  - first:
+      213: -4569771625158920055
+    second: pngtree-game-over-screen-background-blue-color-png-image_6005692_172
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_16
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 1000
+        width: 113
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5722b92a14da35b30800000000000000
+      internalID: 4274950968717288053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_22
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 1001
+        width: 114
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5f17eedcdbdce4d0800000000000000
+      internalID: -3103864301486137506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_23
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 1001
+        width: 114
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8a5dd091e1f655f0800000000000000
+      internalID: -768160735319729525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_24
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 1001
+        width: 114
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f930a8d91ff851bd0800000000000000
+      internalID: -2660061736999451745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_25
+      rect:
+        serializedVersion: 2
+        x: 855
+        y: 1000
+        width: 114
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 336e6aa16c4e0cef0800000000000000
+      internalID: -89820453045606861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_43
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 655
+        width: 778
+        height: 249
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae56dbc817c1ebf50800000000000000
+      internalID: 6898982953196283370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_70
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 343
+        width: 748
+        height: 259
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b4d85de6c7800eb0800000000000000
+      internalID: -4755651918047947598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_137
+      rect:
+        serializedVersion: 2
+        x: 629
+        y: 96
+        width: 27
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f62dbad0e49780380800000000000000
+      internalID: -9004814078783532433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_138
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 96
+        width: 26
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 643fac3ab8f7c75b0800000000000000
+      internalID: -5369276418007305402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_139
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 96
+        width: 27
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a632f7945d40161c0800000000000000
+      internalID: -4512320037540912278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_0
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 96
+        width: 25
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 979034e29ae74864db5bfd67b9cbf788
+      internalID: -900042570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_1
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 96
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02124fa023ea1344a8aa22f8df32534a
+      internalID: -648114019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_2
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 96
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee5d0c1da7245f2478ca9b961147b204
+      internalID: -2131337170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_3
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 96
+        width: 14
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8aeacd26f5723040b0bc975da5466af
+      internalID: 358103657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_4
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 96
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e3d8f620da66f44f903060a7d744a57
+      internalID: 907674221
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_5
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 115
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64cf2b38e250b8a43a68688c53ba5d41
+      internalID: 2142952722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_6
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 96
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf7c99c5ed6273e44a2ff8d5cadac7b8
+      internalID: 1034355034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_7
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 96
+        width: 26
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b47f48d468279ef4ba16266daf88e632
+      internalID: -731106436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_8
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 96
+        width: 15
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91b4936710319f6479be071c9c2ecae0
+      internalID: -332319410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pngtree-game-over-screen-background-blue-color-png-image_6005692_9
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 95
+        width: 27
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67fa588d05097cf44ba9a502b01a621c
+      internalID: 1033662193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: dc067434d5f44984699d195fb4f8cf1e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      pngtree-game-over-screen-background-blue-color-png-image_6005692_0: -900042570
+      pngtree-game-over-screen-background-blue-color-png-image_6005692_1: -648114019
+      pngtree-game-over-screen-background-blue-color-png-image_6005692_2: -2131337170
+      pngtree-game-over-screen-background-blue-color-png-image_6005692_3: 358103657
+      pngtree-game-over-screen-background-blue-color-png-image_6005692_4: 907674221
+      pngtree-game-over-screen-background-blue-color-png-image_6005692_5: 2142952722
+      pngtree-game-over-screen-background-blue-color-png-image_6005692_6: 1034355034
+      pngtree-game-over-screen-background-blue-color-png-image_6005692_7: -731106436
+      pngtree-game-over-screen-background-blue-color-png-image_6005692_8: -332319410
+      pngtree-game-over-screen-background-blue-color-png-image_6005692_9: 1033662193
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
