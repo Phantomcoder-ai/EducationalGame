@@ -103,10 +103,12 @@ public class SharkMovement : MonoBehaviour
             if (hook != null)
             {
                 hook.ForceReturn(); // Отпускаем рыбу обратно в воду
-                //HealthManager.Instance.TakeDamage(1); // Уменьшаем здоровье на 1
             }
-            
-            
+            if (HealthManager.Instance != null)
+            {
+                HealthManager.Instance.TakeDamage(1);
+            }
+
             StartCoroutine(StunShark());
         }
     }

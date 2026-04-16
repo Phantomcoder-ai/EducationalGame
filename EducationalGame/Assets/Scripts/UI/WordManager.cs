@@ -50,6 +50,10 @@ public class WordManager : MonoBehaviour
         else
         {
             Debug.Log("Не та буква. Нужно: " + targetWord[currentProgress]);
+            if (HealthManager.Instance != null)
+            {
+                HealthManager.Instance.TakeDamage(1);
+            }
             return false;
         }
     }
