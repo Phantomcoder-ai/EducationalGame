@@ -89,7 +89,7 @@ public class FishMovement : MonoBehaviour
             Vector3 leafPos = leafTransform.localPosition;
             // Если плывем вправо, листок должен быть слева от центра (сзади)
             // Если плывем влево, листок должен быть справа от центра (сзади)
-            float xOffset = movingRight ? -1.2f : 2.2f; // Настрой это число под свою рыбу
+            float xOffset = movingRight ? -1f : 2f; // Настрой это число под свою рыбу
             leafTransform.localPosition = new Vector3(xOffset, leafPos.y, leafPos.z);
         }
     }

@@ -142,15 +142,27 @@ public class HookController : MonoBehaviour
 
     void ReleaseFishBackToWater()
     {
-        caughtFish.transform.SetParent(null); // Отцепляем от крючка
+        if (caughtFish == null) return;
 
-        // Возвращаем рыбе случайную глубину, чтобы она не плавала у поверхности
+        // 1. Отцепляем от родителя
+        caughtFish.transform.SetParent(null);
+
+        // 2. Включаем физику и ИИ обратно
+        Rigidbody2D fishRb = caughtFish.GetComponent<Rigidbody2D>();
+        if (fishRb != null)
+        {
+            fishRb.simulated = true;
+            fishRb.linearVelocity = Vector2.zero; // Сбрасываем скорость
+        }
+
+        var fm = caughtFish.GetComponent<FishMovement>();
+        if (fm != null) fm.enabled = true;
+
+        // 3. Перемещаем в случайное место воды
         float randomY = Random.Range(-15f, -8f);
         caughtFish.transform.position = new Vector3(transform.position.x, randomY, 0);
 
-        // Включаем скрипт движения обратно
-        var fm = caughtFish.GetComponent<FishMovement>();
-        if (fm != null) fm.enabled = true;
+        caughtFish = null;
 
         Debug.Log("Буква не та! Рыба возвращена в море.");
     }
@@ -182,17 +194,48 @@ public class HookController : MonoBehaviour
     private void AttachFish(GameObject fish)
     {
         if (fish == null) return;
-
         caughtFish = fish;
-        caughtFish.transform.SetParent(transform);
 
-        caughtFish.transform.localPosition = Vector3.zero;
-        // Подстройте локальную позицию по нужному смещению (пример)
-        //caughtFish.transform.localPosition = new Vector3(0, -0.7f, 0);
+        // 1. Ищем компоненты (включая дочерние)
+        Rigidbody2D fishRb = caughtFish.GetComponent<Rigidbody2D>();
+        CircleCollider2D hookCircle = GetComponentInChildren<CircleCollider2D>();
+        CircleCollider2D fishCircle = caughtFish.GetComponentInChildren<CircleCollider2D>();
 
+        if (hookCircle == null || fishCircle == null)
+        {
+            Debug.LogError("Не удалось найти CircleCollider2D на крючке или рыбе!");
+            return;
+        }
+
+        // 2. Отключаем физику рыбы
+        if (fishRb != null) fishRb.simulated = false;
+
+        // 3. ВЫРАВНИВАНИЕ ПО ЦЕНТРАМ В МИРОВЫХ КООРДИНАТАХ
+        // Находим, где в мире находится центр круга крючка
+        Vector3 hookCenterWorld = hookCircle.transform.TransformPoint(hookCircle.offset);
+
+        // Находим, где в мире находится центр круга рыбы
+        Vector3 fishCenterWorld = fishCircle.transform.TransformPoint(fishCircle.offset);
+
+        // Вычисляем вектор смещения между ними
+        Vector3 diff = hookCenterWorld - fishCenterWorld;
+
+        // Сдвигаем ВСЮ рыбу на этот вектор (теперь центры коллайдеров совпали в мире)
+        caughtFish.transform.position += diff;
+
+        // 4. ПРИВЯЗКА
+        // Теперь, когда они стоят идеально, делаем рыбу ребенком
+        caughtFish.transform.SetParent(this.transform);
+
+        // Сбрасываем поворот (если нужно, чтобы рыба висела ровно)
         caughtFish.transform.localRotation = Quaternion.identity;
+
+        // Принудительно ставим Z в 0, чтобы рыба не была слишком глубоко или близко
+        Vector3 lp = caughtFish.transform.localPosition;
+        caughtFish.transform.localPosition = new Vector3(lp.x, lp.y, 0);
         // Выключаем движение рыбы
         FishMovement fm = caughtFish.GetComponent<FishMovement>();
+        if (fm == null) fm = caughtFish.GetComponentInChildren<FishMovement>();
         if (fm != null) fm.enabled = false;
 
         // Сбрасываем флаг зоны (мы уже поймали эту рыбу)
