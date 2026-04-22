@@ -83,6 +83,7 @@ public class WordManager : MonoBehaviour
         {
             DisplayWord.text = "WSZYSTKIE S?OWA ZEBRANE!";
             Debug.Log("Все слова собраны! Уровень пройден!");
+            HealthManager.Instance.TriggerGameOver(); // Или можно создать отдельный метод для победы, если нужно
         }
     }
 

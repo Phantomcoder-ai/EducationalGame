@@ -1,20 +1,28 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class FishManager : MonoBehaviour
 {
-    public GameObject[] fishPrefabs; // Ссылка на префабы Fish_Complete
-    
+    public enum GameMode { Word, Math }
+
+    [Header("Режим игры")]
+    public GameMode gameMode = GameMode.Word;
+
+    [Header("Префабы рыб")]
+    public GameObject[] fishPrefabs;
+
     [Header("Акула")]
     public GameObject sharkPrefab;
     private GameObject activeShark;
-    
+
+    [Header("Словарный режим")]
     public string targetWord = "МАМА";
-
-
-    [Header("Настройки сложности")]
-    public int extraFishCount = 10; // Сколько лишних рыб добавить
     public string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    public int extraFishCount = 10;
 
+    [Header("Математический режим")]
+    public MathManager mathManager;
+    public int mathFishCount = 5; // сколько рыб с числами спавнить
 
     [Header("Зона появления")]
     public float spawnMinX = -6f;
@@ -29,84 +37,110 @@ public class FishManager : MonoBehaviour
 
     void SpawnAllFish()
     {
-        // 1. Создаем обязательные рыбы для слова
-        for (int i = 0; i < targetWord.Length; i++)
+        if (gameMode == GameMode.Word)
         {
-            CreateFish(targetWord[i].ToString());
+            SpawnWordFish();
         }
-
-        // 2. Создаем случайные рыбы ("обманки")
-        for (int i = 0; i < extraFishCount; i++)
+        else if (gameMode == GameMode.Math)
         {
-            char randomChar = alphabet[Random.Range(0, alphabet.Length)];
-            CreateFish(randomChar.ToString());
+            SpawnMathFish();
         }
     }
 
-    void CreateFish(string letter)
+    // --- СЛОВАРНЫЙ РЕЖИМ ---
+    void SpawnWordFish()
     {
-        Vector3 randomPos = new Vector3(
+        for (int i = 0; i < targetWord.Length; i++)
+            CreateLetterFish(targetWord[i].ToString());
+
+        for (int i = 0; i < extraFishCount; i++)
+        {
+            char randomChar = alphabet[Random.Range(0, alphabet.Length)];
+            CreateLetterFish(randomChar.ToString());
+        }
+    }
+
+    void CreateLetterFish(string letter)
+    {
+        GameObject newFish = SpawnFishAtRandom();
+        FishLetter fishLetterScript = newFish.GetComponentInChildren<FishLetter>();
+        if (fishLetterScript != null)
+            fishLetterScript.SetupLetter(letter);
+    }
+
+    // --- МАТЕМАТИЧЕСКИЙ РЕЖИМ ---
+    void SpawnMathFish()
+    {
+        // Числа на рыбах расставляет MathManager через UpdateFishAnswers,
+        // нам нужно только создать нужное количество рыб
+        for (int i = 0; i < mathFishCount; i++)
+        {
+            GameObject newFish = SpawnFishAtRandom();
+            // FishMath должен быть на префабе — MathManager сам назначит число
+        }
+
+        // После спавна говорим MathManager показать первый вопрос
+        // (он сам вызовет UpdateFishAnswers и расставит числа)
+        if (mathManager != null)
+            mathManager.ShowQuestion();
+        else
+            Debug.LogWarning("FishManager: mathManager не назначен!");
+    }
+
+    // --- ОБЩИЙ СПАВН ---
+    GameObject SpawnFishAtRandom()
+    {
+        Vector3 pos = new Vector3(
             Random.Range(spawnMinX, spawnMaxX),
             Random.Range(spawnMinY, spawnMaxY),
             0
         );
-        int randomPrefabIndex = Random.Range(0, fishPrefabs.Length);
-        GameObject fishPrefab = fishPrefabs[randomPrefabIndex];
-        GameObject newFish = Instantiate(fishPrefab, randomPos, Quaternion.identity);
 
-        // Устанавливаем букву
-        FishLetter fishLetterScript = newFish.GetComponentInChildren<FishLetter>();
-        if (fishLetterScript != null)
-        {
-            fishLetterScript.SetupLetter(letter);
-        }
+        GameObject prefab = fishPrefabs[Random.Range(0, fishPrefabs.Length)];
+        GameObject newFish = Instantiate(prefab, pos, Quaternion.identity);
 
-        // Устанавливаем случайную скорость и направление
         FishMovement movement = newFish.GetComponent<FishMovement>();
         if (movement != null)
         {
             movement.speed = Random.Range(1f, 2.5f);
-            // Чтобы рыбы не плыли все в одну сторону в начале
             movement.movingRight = (Random.value > 0.5f);
         }
+
+        return newFish;
     }
 
+    // --- ОБНОВЛЕНИЕ (для словарного режима) ---
     public void RefreshFishForNewWord(string newWord)
     {
-        GameObject[] oldFish = GameObject.FindGameObjectsWithTag("Fish");
-        var destroyed = new System.Collections.Generic.HashSet<GameObject>();
+        DestroyAllFish();
+        targetWord = newWord;
+        SpawnWordFish();
+    }
 
+    void DestroyAllFish()
+    {
+        GameObject[] oldFish = GameObject.FindGameObjectsWithTag("Fish");
+        var destroyed = new HashSet<GameObject>();
         foreach (GameObject fish in oldFish)
         {
-            // Берём корневой объект (тот, что был инстанцирован)
             GameObject root = fish.transform.root.gameObject;
-
-            // Уничтожаем каждый корень один раз
             if (!destroyed.Contains(root))
             {
                 Destroy(root);
                 destroyed.Add(root);
             }
         }
-
-        targetWord = newWord;
-
-        SpawnAllFish();
     }
 
-    //..................................................................................
-    //SHARK
+    // --- АКУЛА ---
     public void SpawnShark()
     {
-        if (activeShark != null) return; // Акула уже есть
-
-        Vector3 spawnPos = new Vector3(
+        if (activeShark != null) return;
+        Vector3 pos = new Vector3(
             Random.Range(spawnMinX, spawnMaxX),
             Random.Range(spawnMinY, spawnMaxY),
             0
         );
-        activeShark = Instantiate(sharkPrefab, spawnPos, Quaternion.identity);  
+        activeShark = Instantiate(sharkPrefab, pos, Quaternion.identity);
     }
-
-
 }

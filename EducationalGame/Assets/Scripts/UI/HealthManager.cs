@@ -46,7 +46,7 @@ public class HealthManager : MonoBehaviour
         }
     }
 
-    void TriggerGameOver()
+    public void TriggerGameOver()
     {
         GameSessionData.lastSceneName = SceneManager.GetActiveScene().name;
 

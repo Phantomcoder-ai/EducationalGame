@@ -9,8 +9,9 @@ public class HookController : MonoBehaviour
     public bool canMove = false;
     private bool isIntro = false;
     private bool isReelingIn = false;
-
+     
     public WordManager wordManager;
+    public MathManager mathManager; // Добавлено: поддержка MathManager
     private GameObject fishInRange = null; // рыба под крючком (в зоне)
     private GameObject caughtFish = null;   // пойманная рыба (прикреплена к крючку)
     // Потолок для крючка в режиме игры
@@ -103,25 +104,24 @@ public class HookController : MonoBehaviour
                 isReelingIn = false;
                 camControl.currentState = CameraController.CameraState.AtBeach;
 
-                // Обработка пойманной рыбы: удаляем / или можно передать в менеджер
+                // Обработка пойманной рыбы: сначала пытаемся распознать тип и передать в соответствующий менеджер
                 if (caughtFish != null)
                 {
-                    // 1. Пытаемся достать данные о букве из рыбы
-                    // (Предположим, у тебя на рыбе висит скрипт FishData с полем assignedLetter)
-                    var data = caughtFish.GetComponent<FishLetter>();
-                    if (data != null)
+                    // 1. Проверяем, не математическая ли это рыба
+                    FishMath mathData = caughtFish.GetComponent<FishMath>();
+                    if (mathData != null && mathManager != null)
                     {
-                        Debug.Log("Поймана буква: " + data.assignedLetter);
-                        bool isCorrect = wordManager.AddLetter(data.assignedLetter);
-                        if (isCorrect)
+                        if (mathManager.CheckAnswer(mathData.assignedNumber)) Destroy(caughtFish);
+                        else ReleaseFishBackToWater();
+                    }
+                    // 2. Иначе проверяем, не буквенная ли это рыба
+                    else
+                    {
+                        FishLetter letterData = caughtFish.GetComponent<FishLetter>();
+                        if (letterData != null && wordManager != null)
                         {
-                            // Если верно — удаляем рыбу
-                            Destroy(caughtFish);
-                        }
-                        else
-                        {
-                            // Если НЕВЕРНО — возвращаем в воду
-                            ReleaseFishBackToWater();
+                            if (wordManager.AddLetter(letterData.assignedLetter)) Destroy(caughtFish);
+                            else ReleaseFishBackToWater();
                         }
                     }
                     caughtFish = null;
