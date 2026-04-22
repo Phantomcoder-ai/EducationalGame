@@ -1,20 +1,30 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameOverMenu : MonoBehaviour
 {
+    public TextMeshProUGUI resultText; // перетащи текст "GAME OVER" сюда
+
+    void Start()
+    {
+        if (resultText != null)
+        {
+            resultText.text = GameSessionData.isVictory ? "YOU WIN!" : "GAME OVER";
+            resultText.color = GameSessionData.isVictory
+                ? new Color(1f, 0.85f, 0f)  // золотой дл€ победы
+                : new Color(0f, 0.5f, 1f);  // синий дл€ поражени€ (как у теб€ сейчас)
+        }
+    }
+
     public void RestartGame()
     {
-        // ¬место конкретного имени сцены используем наше хранилище
         string sceneToLoad = GameSessionData.lastSceneName;
-
-        Debug.Log("¬озвращаемс€ на: " + sceneToLoad);
         SceneManager.LoadScene(sceneToLoad);
     }
 
     public void BackToMainMenu()
     {
-        // «агружаем стартовую сцену (если она есть) или просто выходим
         SceneManager.LoadScene("MainMenu");
     }
 }

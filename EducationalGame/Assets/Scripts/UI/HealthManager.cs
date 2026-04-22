@@ -48,10 +48,8 @@ public class HealthManager : MonoBehaviour
 
     public void TriggerGameOver()
     {
+        GameSessionData.isVictory = false; // добавь эту строку
         GameSessionData.lastSceneName = SceneManager.GetActiveScene().name;
-
-        Debug.Log("Переход на сцену Game Over...");
-        // Разрешаем времени снова идти (чтобы сцена загрузилась и кнопки работали)
         Time.timeScale = 1f;
         SceneManager.LoadScene("ResultScene");
     }

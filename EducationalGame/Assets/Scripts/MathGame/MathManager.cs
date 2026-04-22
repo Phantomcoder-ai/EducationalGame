@@ -29,12 +29,12 @@ public class MathManager : MonoBehaviour
     public List<MathQuestion> questions = new List<MathQuestion>();
 
     private int currentQuestionIndex = 0;
-    private int score = 0;
+    
 
     void Start()
     {
         // Инициализация счёта
-        score = 0;
+        
         if (scoreText != null) scoreText.text = "Score: 0";
 
         if (questions.Count > 0)
@@ -144,23 +144,29 @@ public class MathManager : MonoBehaviour
             // Добавляем в историю
             AddToHistory(questions[questionIndexAtCheck].formula, playerAnswer);
 
-            score++;
-            if (scoreText != null) scoreText.text = "Score: " + score;
-
-            currentQuestionIndex++;
-            if (currentQuestionIndex >= questions.Count)
+            /*if (LevelManager.Instance != null)
+                LevelManager.Instance.OnCorrectAnswer();
+            else
             {
-                currentQuestionIndex = 0;
-                Debug.Log("Все вопросы пройдены, начинаем заново!");
-            }
+                // фолбэк если LevelManager не назначен
+                score++;
+                if (scoreText != null) scoreText.text = "Score: " + score;
+            }*/
 
             // Задержка перед следующим вопросом, чтобы "?" успела замениться на экране
             StartCoroutine(ShowNextQuestionDelayed(1.2f));
+            
             return true;
+
+
         }
         else
         {
-            if (healthManager != null) healthManager.TakeDamage(1);
+            /*if (LevelManager.Instance != null)
+                LevelManager.Instance.OnWrongAnswer();*/
+
+            if (healthManager != null)
+                healthManager.TakeDamage(1);
         }
         return false;
     }
@@ -215,5 +221,103 @@ public class MathManager : MonoBehaviour
         }
 
         Debug.Log("MathManager.AddToHistory: добавлена запись: " + completedFormula);
+    }
+
+    public void SetDifficulty(int level)
+    {
+        questions.Clear();
+
+        for (int i = 0; i < 10; i++)
+        {
+            MathQuestion q = GenerateQuestion(level);
+            questions.Add(q);
+        }
+
+        currentQuestionIndex = 0;
+        ShowQuestion();
+    }
+
+    MathQuestion GenerateQuestion(int level)
+    {
+        MathQuestion q = new MathQuestion();
+        int a, b;
+
+        if (level == 1)
+        {
+            // Только сложение, числа до 10
+            a = Random.Range(1, 9);
+            b = Random.Range(1, 10 - a);
+            q.formula = $"{a} + ? = {a + b}";
+            q.correctAnswer = b;
+        }
+        else if (level == 2)
+        {
+            // Сложение и вычитание, числа до 15
+            a = Random.Range(2, 12);
+            b = Random.Range(1, a);
+            bool isAdd = Random.value > 0.5f;
+            if (isAdd)
+            {
+                q.formula = $"{a} + ? = {a + b}";
+                q.correctAnswer = b;
+            }
+            else
+            {
+                q.formula = $"{a} - ? = {a - b}";
+                q.correctAnswer = b;
+            }
+        }
+        else if (level == 3)
+        {
+            // Числа до 20, появляется умножение
+            bool isMult = Random.value > 0.6f;
+            if (isMult)
+            {
+                a = Random.Range(2, 6);
+                b = Random.Range(2, 6);
+                q.formula = $"{a} x ? = {a * b}";
+                q.correctAnswer = b;
+            }
+            else
+            {
+                a = Random.Range(5, 18);
+                b = Random.Range(1, a - 2);
+                q.formula = $"{a} - ? = {a - b}";
+                q.correctAnswer = b;
+            }
+        }
+        else if (level == 4)
+        {
+            // Умножение и деление
+            a = Random.Range(2, 8);
+            b = Random.Range(2, 8);
+            bool isDiv = Random.value > 0.5f;
+            if (isDiv)
+            {
+                q.formula = $"{a * b} / ? = {a}";
+                q.correctAnswer = b;
+            }
+            else
+            {
+                q.formula = $"{a} x ? = {a * b}";
+                q.correctAnswer = b;
+            }
+        }
+        else // level 5
+        {
+            // Всё вместе, числа до 50
+            int type = Random.Range(0, 4);
+            a = Random.Range(3, 10);
+            b = Random.Range(2, 10);
+            switch (type)
+            {
+                case 0: q.formula = $"{a} + ? = {a + b}"; q.correctAnswer = b; break;
+                case 1: q.formula = $"{a + b} - ? = {a}"; q.correctAnswer = b; break;
+                case 2: q.formula = $"{a} x ? = {a * b}"; q.correctAnswer = b; break;
+                case 3: q.formula = $"{a * b} / ? = {a}"; q.correctAnswer = b; break;
+            }
+        }
+
+        return q;
     }
 }

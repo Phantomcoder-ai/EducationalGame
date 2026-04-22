@@ -1,5 +1,7 @@
 public static class GameSessionData
 {
-    // Статическая переменная живет всё время, пока запущена игра
-    public static string lastSceneName = "WordPlaying";
+    public static string lastSceneName;
+    public static bool isVictory = false;
+    public static int score = 0;
+    public static int combo = 0;
 }
