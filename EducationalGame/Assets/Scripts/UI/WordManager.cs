@@ -103,4 +103,14 @@ public class WordManager : MonoBehaviour
         }
         DisplayWord.text = display;
     }
+
+    public void SetDifficulty(int level)
+    {
+        // Уровень 1 — короткие слова (3-4 буквы)
+        // Уровень 2 — средние слова (5 букв)
+        // Уровень 3+ — длинные слова (6+ букв)
+        // Логику слов настраиваешь сам под свой WordManager
+        Debug.Log($"WordManager: сложность уровня {level}");
+    }
+
 }

@@ -1,9 +1,14 @@
-/*using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
+
+    public enum Mode { Math, Word }
+
+    [Header("Режим игры")]
+    public Mode gameMode = Mode.Math;
 
     [Header("Настройки уровней")]
     public int correctAnswersPerLevel = 10;
@@ -17,9 +22,9 @@ public class LevelManager : MonoBehaviour
 
     [Header("Ссылки")]
     public FishManager fishManager;
-    public MathManager mathManager;
-    public DarknessController darknessController; // создадим позже
-    public TimerController timerController;       // создадим позже
+    public MathManager mathManager;   // только для Math режима
+    public WordManager wordManager;   // только для Word режима
+    public TimerController timerController;
 
     void Awake()
     {
@@ -31,15 +36,13 @@ public class LevelManager : MonoBehaviour
         ApplyLevelSettings();
     }
 
-    // Вызывается из MathManager или WordManager при правильном ответе
     public void OnCorrectAnswer()
     {
         correctAnswersThisLevel++;
 
         // Комбо очки
         comboCount++;
-        int points = 10 * comboCount; // 10, 20, 30, 40...
-        if (comboCount >= 4) points = 80; // кап на комбо
+        int points = Mathf.Min(10 * comboCount, 80);
         totalScore += points;
 
         GameSessionData.score = totalScore;
@@ -47,20 +50,15 @@ public class LevelManager : MonoBehaviour
 
         // Триггеры внутри уровня
         if (correctAnswersThisLevel == 2)
-            fishManager.SpawnShark();
+            fishManager?.SpawnShark();
 
-        if (correctAnswersThisLevel == 5 && darknessController != null)
-            darknessController.EnableDarkness();
-
-        // Переход на следующий уровень
         if (correctAnswersThisLevel >= correctAnswersPerLevel)
             NextLevel();
     }
 
-    // Вызывается при неправильном ответе
     public void OnWrongAnswer()
     {
-        comboCount = 0; // сброс комбо
+        comboCount = 0;
     }
 
     void NextLevel()
@@ -70,7 +68,6 @@ public class LevelManager : MonoBehaviour
 
         if (currentLevel >= maxLevels)
         {
-            // Победа!
             GameSessionData.isVictory = true;
             GameSessionData.lastSceneName = SceneManager.GetActiveScene().name;
             Time.timeScale = 1f;
@@ -85,17 +82,17 @@ public class LevelManager : MonoBehaviour
 
     void ApplyLevelSettings()
     {
-        // Скорость рыб
+        // Скорость рыб — одинаково для обоих режимов
         float fishSpeed = 1f + (currentLevel - 1) * 0.4f;
         SetAllFishSpeed(fishSpeed);
 
-        // Таймер (с 3 уровня)
+        // Таймер с 3 уровня — одинаково для обоих режимов
         if (timerController != null)
         {
             if (currentLevel >= 3)
             {
-                float timerDuration = 20f + (currentLevel - 3) * 5f; // 20, 25, 30
-                timerController.SetTimer(timerDuration);
+                float duration = 20f + (currentLevel - 3) * 5f;
+                timerController.SetTimer(duration);
                 timerController.gameObject.SetActive(true);
             }
             else
@@ -104,20 +101,19 @@ public class LevelManager : MonoBehaviour
             }
         }
 
-        // Сложность математики
-        if (mathManager != null)
+        // Сложность — зависит от режима
+        if (gameMode == Mode.Math && mathManager != null)
             mathManager.SetDifficulty(currentLevel);
 
-        Debug.Log($"Уровень {currentLevel} начался!");
+        if (gameMode == Mode.Word && wordManager != null)
+            wordManager.SetDifficulty(currentLevel);
+
+        Debug.Log($"Уровень {currentLevel} начался! Режим: {gameMode}");
     }
 
     void ResetLevelTriggers()
     {
-        // Убираем акулу и темноту при переходе на новый уровень
-        if (darknessController != null)
-            darknessController.DisableDarkness();
 
-        // Акулу уничтожаем
         GameObject shark = GameObject.FindGameObjectWithTag("Shark");
         if (shark != null) Destroy(shark);
     }
@@ -128,4 +124,4 @@ public class LevelManager : MonoBehaviour
         foreach (var fish in allFish)
             fish.speed = speed;
     }
-}*/
+}
