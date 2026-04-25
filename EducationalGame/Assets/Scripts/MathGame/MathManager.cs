@@ -87,7 +87,7 @@ public class MathManager : MonoBehaviour
                 while (attempts < 100)
                 {
                     wrong = correct + Random.Range(-10, 11);
-                    if (wrong != correct && wrong >= 0 && !usedNumbers.Contains(wrong))
+                    if (wrong != correct && !usedNumbers.Contains(wrong))
                     {
                         foundUnique = true;
                         break;
@@ -113,10 +113,15 @@ public class MathManager : MonoBehaviour
             if (currentQuestionText != null)
                 currentQuestionText.text = "";
 
-            if (LevelManager.Instance != null)
+            if (LevelManager.Instance != null) { 
                 LevelManager.Instance.OnCorrectAnswer();
+                if (scoreText != null)
+                    scoreText.text = "Score: " + LevelManager.Instance.totalScore;
+            }
+                
 
             StartCoroutine(ShowNextQuestionDelayed(1.2f));
+           
             return true;
         }
         else
@@ -155,46 +160,130 @@ public class MathManager : MonoBehaviour
 
         if (level == 1)
         {
-            a = Random.Range(1, 9);
-            b = Random.Range(1, 10 - a);
-            q.formula = $"{a} + ? = {a + b}";
-            q.correctAnswer = b;
-        }
-        else if (level == 2)
-        {
-            a = Random.Range(2, 12);
-            b = Random.Range(1, a);
-            if (Random.value > 0.5f) { q.formula = $"{a} + ? = {a + b}"; q.correctAnswer = b; }
-            else { q.formula = $"{a} - ? = {a - b}"; q.correctAnswer = b; }
-        }
-        else if (level == 3)
-        {
-            if (Random.value > 0.6f)
+            a = Random.Range(1, 11);
+            b = Random.Range(1, 11);
+            if (Random.value > 0.5f)
             {
-                a = Random.Range(2, 6); b = Random.Range(2, 6);
-                q.formula = $"{a} x ? = {a * b}"; q.correctAnswer = b;
+                q.formula = $"{a} + ? = {a + b}";
+                q.correctAnswer = b;
             }
             else
             {
-                a = Random.Range(5, 18); b = Random.Range(1, a - 2);
-                q.formula = $"{a} - ? = {a - b}"; q.correctAnswer = b;
+                // b может быть больше a — ответ будет отрицательным
+                q.formula = $"{a} - ? = {a - b}";
+                q.correctAnswer = b;
+            }
+        }
+        else if (level == 2)
+        {
+            // Плюс/минус, числа до 100
+            a = Random.Range(1, 101);
+            b = Random.Range(1, 101);
+            if (Random.value > 0.5f)
+            {
+                q.formula = $"{a} + ? = {a + b}";
+                q.correctAnswer = b;
+            }
+            else
+            {
+                int big = Mathf.Max(a, b);
+                int small = Mathf.Min(a, b);
+                q.formula = $"{big} - ? = {big - small}";
+                q.correctAnswer = small;
+            }
+        }
+        else if (level == 3)
+        {
+            // Плюс/минус/умножение, числа от 1 до 10
+            int type = Random.Range(0, 3);
+            a = Random.Range(1, 11);
+            b = Random.Range(1, 11);
+
+            switch (type)
+            {
+                case 0:
+                    q.formula = $"{a} + ? = {a + b}";
+                    q.correctAnswer = b;
+                    break;
+                case 1:
+                    int big = Mathf.Max(a, b);
+                    int small = Mathf.Min(a, b);
+                    q.formula = $"{big} - ? = {big - small}";
+                    q.correctAnswer = small;
+                    break;
+                case 2:
+                    q.formula = $"{a} x ? = {a * b}";
+                    q.correctAnswer = b;
+                    break;
             }
         }
         else if (level == 4)
         {
-            a = Random.Range(2, 8); b = Random.Range(2, 8);
-            if (Random.value > 0.5f) { q.formula = $"{a * b} / ? = {a}"; q.correctAnswer = b; }
-            else { q.formula = $"{a} x ? = {a * b}"; q.correctAnswer = b; }
-        }
-        else
-        {
-            a = Random.Range(3, 10); b = Random.Range(2, 10);
-            switch (Random.Range(0, 4))
+            // Умножение (1-10) и деление (числа до 100)
+            if (Random.value > 0.5f)
             {
-                case 0: q.formula = $"{a} + ? = {a + b}"; q.correctAnswer = b; break;
-                case 1: q.formula = $"{a + b} - ? = {a}"; q.correctAnswer = b; break;
-                case 2: q.formula = $"{a} x ? = {a * b}"; q.correctAnswer = b; break;
-                default: q.formula = $"{a * b} / ? = {a}"; q.correctAnswer = b; break;
+                // Умножение
+                a = Random.Range(2, 11);
+                b = Random.Range(2, 11);
+                q.formula = $"{a} x ? = {a * b}";
+                q.correctAnswer = b;
+            }
+            else
+            {
+                // Деление — берём красивые числа
+                // делитель от 2 до 12, результат от 2 до 12
+                b = Random.Range(2, 13); // делитель
+                int result = Random.Range(2, 13); // результат
+                a = b * result; // делимое
+                q.formula = $"{a} / ? = {result}";
+                q.correctAnswer = b;
+            }
+        }
+        else // level 5
+        {
+            // Всё вместе, усложнённые числа
+            int type = Random.Range(0, 5);
+
+            switch (type)
+            {
+                case 0:
+                    // Сложение до 200
+                    a = Random.Range(10, 151);
+                    b = Random.Range(10, 151);
+                    q.formula = $"{a} + ? = {a + b}";
+                    q.correctAnswer = b;
+                    break;
+                case 1:
+                    // Вычитание до 200
+                    a = Random.Range(50, 201);
+                    b = Random.Range(10, a);
+                    q.formula = $"{a} - ? = {a - b}";
+                    q.correctAnswer = b;
+                    break;
+                case 2:
+                    // Умножение до 12
+                    a = Random.Range(2, 13);
+                    b = Random.Range(2, 13);
+                    q.formula = $"{a} x ? = {a * b}";
+                    q.correctAnswer = b;
+                    break;
+                case 3:
+                    // Деление, красивые числа
+                    b = Random.Range(2, 13);
+                    int res = Random.Range(2, 13);
+                    a = b * res;
+                    q.formula = $"{a} / ? = {res}";
+                    q.correctAnswer = b;
+                    break;
+                case 4:
+                    // Двухшаговое выражение: a + b*c = ?
+                    // Показываем как "a + b x c = ?" где ? это результат b*c
+                    int m = Random.Range(2, 8);
+                    int n = Random.Range(2, 8);
+                    int sum = Random.Range(5, 20);
+                    q.formula = $"{sum} + {m} x ? = {sum + m * n}";
+                    q.correctAnswer = n;
+                    break;
             }
         }
 

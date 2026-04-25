@@ -92,13 +92,17 @@ public class SharkMovement : MonoBehaviour
     {
         if (other.CompareTag("Hook"))
         {
+            HookController hook = other.GetComponent<HookController>();
+            // Не атакуем крючок пока он опускается или уже поднимается
+            if (hook != null && (!hook.canMove)) return;
+
             Debug.Log("<color=red>Акула ударила крючок!</color>");
 
             if (CameraShake.Instance != null)
             {
                 CameraShake.Instance.Shake(0.3f, 0.4f);
             }
-            HookController hook = other.GetComponent<HookController>();
+            
             // 2. Заставляем крючок подняться
             if (hook != null)
             {

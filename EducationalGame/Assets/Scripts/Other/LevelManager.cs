@@ -76,6 +76,21 @@ public class LevelManager : MonoBehaviour
         }
 
         currentLevel++;
+
+        // Останавливаем таймер на время попапа
+        if (timerController != null)
+            timerController.StopTimer();
+
+        // Показываем попап
+        if (LevelUpPopup.Instance != null)
+            LevelUpPopup.Instance.Show(currentLevel, totalScore);
+        else
+            OnLevelUpPopupFinished(); // если попапа нет — сразу продолжаем
+    }
+
+    // Вызывается когда попап закрылся
+    public void OnLevelUpPopupFinished()
+    {
         ApplyLevelSettings();
         ResetLevelTriggers();
     }

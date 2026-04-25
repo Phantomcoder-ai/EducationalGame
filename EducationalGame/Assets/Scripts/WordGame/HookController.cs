@@ -181,6 +181,9 @@ public class HookController : MonoBehaviour
     // Фиксируем рыбу в зоне крючка — но не приклеиваем!
     void OnTriggerEnter2D(Collider2D other)
     {
+        // Игнорируем все столкновения пока крючок опускается
+        if (isIntro) return;
+
         // Ищем компонент движения рыбы в родителе/самом объекте
         var fishMove = other.GetComponentInParent<FishMovement>();
         if (fishMove != null)
@@ -256,6 +259,7 @@ public class HookController : MonoBehaviour
 
     public void ForceReturn()
     {
+        isIntro = false;
         StartReeling();
         // 2. Если на крючке в этот момент была рыба — её нужно отцепить (съела акула)
         // Предположим, рыба становится ребенком крючка при поимке:
@@ -278,6 +282,7 @@ public class HookController : MonoBehaviour
 
     void UpdateVisualDirection()
     {
+        if (!canMove) return;
         // 1. Получаем ввод игрока (-1 для "влево", 1 для "вправо", 0 если не жмем)
         float moveX = Input.GetAxisRaw("Horizontal");
 

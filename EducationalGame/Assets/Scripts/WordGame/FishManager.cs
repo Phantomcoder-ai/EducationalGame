@@ -18,17 +18,13 @@ public class FishManager : MonoBehaviour
     [Header("Словарный режим")]
     public string targetWord = "МАМА";
     public string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    public int extraFishCount = 10;
+    public int extraFishCount = 15;
 
     [Header("Математический режим")]
     public MathManager mathManager;
-    public int mathFishCount = 5; // сколько рыб с числами спавнить
+    public int mathFishCount = 15; // сколько рыб с числами спавнить
 
-    [Header("Зона появления")]
-    public float spawnMinX = -6f;
-    public float spawnMaxX = 6f;
-    public float spawnMinY = -15f;
-    public float spawnMaxY = -9f;
+    
 
     void Start()
     {
@@ -90,18 +86,19 @@ public class FishManager : MonoBehaviour
     // --- ОБЩИЙ СПАВН ---
     GameObject SpawnFishAtRandom()
     {
-        Vector3 pos = new Vector3(
-            Random.Range(spawnMinX, spawnMaxX),
-            Random.Range(spawnMinY, spawnMaxY),
-            0
-        );
-
         GameObject prefab = fishPrefabs[Random.Range(0, fishPrefabs.Length)];
-        GameObject newFish = Instantiate(prefab, pos, Quaternion.identity);
+
+        // Сначала создаём рыбу в нулевой точке
+        GameObject newFish = Instantiate(prefab, Vector3.zero, Quaternion.identity);
 
         FishMovement movement = newFish.GetComponent<FishMovement>();
         if (movement != null)
         {
+            // Берём границы прямо из FishMovement
+            float x = Random.Range(movement.minX, movement.maxX);
+            float y = Random.Range(movement.minY, movement.maxY);
+            newFish.transform.position = new Vector3(x, y, 0);
+
             movement.speed = Random.Range(1f, 2.5f);
             movement.movingRight = (Random.value > 0.5f);
         }
@@ -136,9 +133,17 @@ public class FishManager : MonoBehaviour
     public void SpawnShark()
     {
         if (activeShark != null) return;
+
+        // Берём границы из любой живой рыбы
+        FishMovement anyFish = FindAnyObjectByType<FishMovement>();
+        float minX = anyFish != null ? anyFish.minX : -13f;
+        float maxX = anyFish != null ? anyFish.maxX : 13f;
+        float minY = anyFish != null ? anyFish.minY : -16.5f;
+        float maxY = anyFish != null ? anyFish.maxY : -7.5f;
+
         Vector3 pos = new Vector3(
-            Random.Range(spawnMinX, spawnMaxX),
-            Random.Range(spawnMinY, spawnMaxY),
+            Random.Range(minX, maxX),
+            Random.Range(minY, maxY),
             0
         );
         activeShark = Instantiate(sharkPrefab, pos, Quaternion.identity);

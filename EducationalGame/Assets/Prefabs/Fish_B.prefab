@@ -376,8 +376,8 @@ MonoBehaviour:
   speed: 1
   panicMultiplier: 3
   originalSpeed: 0
-  minX: -13
-  maxX: 13
+  minX: -10
+  maxX: 10
   minY: -16.5
   maxY: -7.5
   movingRight: 1
