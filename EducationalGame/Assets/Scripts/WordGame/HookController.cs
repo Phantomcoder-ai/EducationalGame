@@ -53,6 +53,10 @@ public class HookController : MonoBehaviour
                 isIntro = false;
                 canMove = true;
                 camControl.currentState = CameraController.CameraState.LockedAtBottom;
+
+                // Возобновляем темноту когда крючок опустился
+                DarknessController darkness = FindAnyObjectByType<DarknessController>();
+                if (darkness != null) darkness.ResumeDarkness();
                 // Запускаем таймер если он активен
                 TimerController timer = FindAnyObjectByType<TimerController>();
                 if (timer != null && timer.gameObject.activeSelf)
@@ -306,5 +310,9 @@ public class HookController : MonoBehaviour
         canMove = false;
         isReelingIn = true;
         camControl.currentState = CameraController.CameraState.FollowingHook; // Камера снова едет за крючком
+
+        // Скрываем темноту пока крючок поднимается
+        DarknessController darkness = FindAnyObjectByType<DarknessController>();
+        if (darkness != null) darkness.PauseDarkness();
     }
 }

@@ -20,7 +20,7 @@ public class LevelUpPopup : MonoBehaviour
     {
         Instance = this;
         canvasGroup = GetComponent<CanvasGroup>();
-        gameObject.SetActive(false);
+        canvasGroup.alpha = 0f; // невидим но активен
     }
 
     public void Show(int newLevel, int score)
@@ -29,16 +29,16 @@ public class LevelUpPopup : MonoBehaviour
             levelText.text = newLevel >= 6 ? "ПОБЕДА!" : $"УРОВЕНЬ {newLevel}";
         if (scoreText != null)
             scoreText.text = "Очки: " + score;
-
+        // Показываем
+        gameObject.SetActive(true);
         StopAllCoroutines();
         StartCoroutine(ShowRoutine());
     }
 
     IEnumerator ShowRoutine()
     {
-        // Показываем
-        gameObject.SetActive(true);
-        canvasGroup.alpha = 0f;
+        
+        
 
         // Плавное появление
         float t = 0f;

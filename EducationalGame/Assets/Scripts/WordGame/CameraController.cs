@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
 
     [Header("Затемнение")]
     public DarknessController darknessController;
-    private bool darknessTriggered = false; // чтобы не вызывать каждый кадр
+    public bool darknessTriggered = false; // чтобы не вызывать каждый кадр
 
     void LateUpdate()
     {
@@ -41,7 +41,8 @@ public class CameraController : MonoBehaviour
                 if (!darknessTriggered && darknessController != null)
                 {
                     bool shouldBeDark = LevelManager.Instance != null &&
-                                       LevelManager.Instance.correctAnswersThisLevel >= 5;
+                    LevelManager.Instance.correctAnswersThisLevel >= 3 &&
+                    LevelManager.Instance.correctAnswersThisLevel < 5;
                     if (shouldBeDark)
                     {
                         darknessTriggered = true;

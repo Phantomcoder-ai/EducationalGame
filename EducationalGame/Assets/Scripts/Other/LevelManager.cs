@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     public Mode gameMode = Mode.Math;
 
     [Header("Настройки уровней")]
-    public int correctAnswersPerLevel = 10;
+    public int correctAnswersPerLevel = 7;
     public int maxLevels = 5;
 
     [Header("Текущее состояние")]
@@ -52,6 +52,17 @@ public class LevelManager : MonoBehaviour
         if (correctAnswersThisLevel == 2)
             fishManager?.SpawnShark();
 
+        if (correctAnswersThisLevel == 5)
+        {
+            // Темнота выключается
+            DarknessController darkness = FindAnyObjectByType<DarknessController>();
+            if (darkness != null) darkness.DisableDarkness();
+
+            // Сбрасываем флаг в камере чтобы темнота могла включиться снова на следующем уровне
+            CameraController cam = FindAnyObjectByType<CameraController>();
+            if (cam != null) cam.darknessTriggered = false;
+        }
+
         if (correctAnswersThisLevel >= correctAnswersPerLevel)
             NextLevel();
     }
@@ -63,6 +74,8 @@ public class LevelManager : MonoBehaviour
 
     void NextLevel()
     {
+        Debug.Log("NextLevel вызван! LevelUpPopup.Instance = " + LevelUpPopup.Instance);
+
         correctAnswersThisLevel = 0;
         comboCount = 0;
 
@@ -85,7 +98,11 @@ public class LevelManager : MonoBehaviour
         if (LevelUpPopup.Instance != null)
             LevelUpPopup.Instance.Show(currentLevel, totalScore);
         else
+        {
+            Debug.LogError("LevelUpPopup.Instance == null!");
             OnLevelUpPopupFinished(); // если попапа нет — сразу продолжаем
+        }
+            
     }
 
     // Вызывается когда попап закрылся

@@ -73,6 +73,18 @@ public class DarknessController : MonoBehaviour
         Debug.Log("“емнота включена Ч плавное по€вление!");
     }
 
+    public void PauseDarkness()
+    {
+        if (darknessOverlay != null)
+            darknessOverlay.SetActive(false);
+    }
+
+    public void ResumeDarkness()
+    {
+        if (!isActive) return; // если темнота не была включена Ч не возобновл€ем
+        if (darknessOverlay != null)
+            darknessOverlay.SetActive(true);
+    }
     public void DisableDarkness()
     {
         isActive = false;

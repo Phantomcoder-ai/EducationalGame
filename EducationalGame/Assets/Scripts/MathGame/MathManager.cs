@@ -177,8 +177,8 @@ public class MathManager : MonoBehaviour
         else if (level == 2)
         {
             // Плюс/минус, числа до 100
-            a = Random.Range(1, 101);
-            b = Random.Range(1, 101);
+            a = Random.Range(1, 51);
+            b = Random.Range(1, 51);
             if (Random.value > 0.5f)
             {
                 q.formula = $"{a} + ? = {a + b}";
