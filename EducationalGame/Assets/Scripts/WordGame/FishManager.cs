@@ -15,6 +15,10 @@ public class FishManager : MonoBehaviour
     public GameObject sharkPrefab;
     private GameObject activeShark;
 
+    [Header("Рыба-фугу")]
+    public GameObject fuguPrefab;
+    public int fuguCount = 1; // сколько фугу спавнить
+
     [Header("Словарный режим")]
     public string targetWord = "МАМА";
     public string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -75,6 +79,13 @@ public class FishManager : MonoBehaviour
             // FishMath должен быть на префабе — MathManager сам назначит число
         }
 
+        // Фугу появляется со 2 уровня
+        if (fuguPrefab != null && LevelManager.Instance != null &&
+            LevelManager.Instance.currentLevel >= 1)
+        {
+            for (int i = 0; i < fuguCount; i++)
+                SpawnFuguAtRandom();
+        }
         // После спавна говорим MathManager показать первый вопрос
         // (он сам вызовет UpdateFishAnswers и расставит числа)
         if (mathManager != null)
@@ -147,5 +158,20 @@ public class FishManager : MonoBehaviour
             0
         );
         activeShark = Instantiate(sharkPrefab, pos, Quaternion.identity);
+    }
+
+    void SpawnFuguAtRandom()
+    {
+        GameObject newFish = Instantiate(fuguPrefab, Vector3.zero, Quaternion.identity);
+
+        FishMovement movement = newFish.GetComponent<FishMovement>();
+        if (movement != null)
+        {
+            float x = Random.Range(movement.minX, movement.maxX);
+            float y = Random.Range(movement.minY, movement.maxY);
+            newFish.transform.position = new Vector3(x, y, 0);
+            movement.speed = Random.Range(1.5f, 3f); // чуть быстрее обычных
+            movement.movingRight = (Random.value > 0.5f);
+        }
     }
 }

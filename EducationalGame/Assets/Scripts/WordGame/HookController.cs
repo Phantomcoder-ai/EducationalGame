@@ -188,6 +188,14 @@ public class HookController : MonoBehaviour
         // Игнорируем все столкновения пока крючок опускается
         if (isIntro) return;
 
+        // Проверяем фугу
+        FishFugu fugu = other.GetComponentInParent<FishFugu>();
+        if (fugu != null)
+        {
+            fugu.Explode();
+            return; // крючок не поднимается, просто взрыв
+        }
+
         // Ищем компонент движения рыбы в родителе/самом объекте
         var fishMove = other.GetComponentInParent<FishMovement>();
         if (fishMove != null)
