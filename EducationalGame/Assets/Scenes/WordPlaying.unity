@@ -2205,6 +2205,8 @@ MonoBehaviour:
   sharkPrefab: {fileID: 544052312838638481, guid: a660870a96811ae48ac11a7b6e4f6528, type: 3}
   fuguPrefab: {fileID: 8690786391197387751, guid: ae8ab267b5c58f64ea9814c89fa48885, type: 3}
   fuguCount: 1
+  goldenFishPrefab: {fileID: 8690786391197387751, guid: c7a4514f62d44b24b8dfdd4119bf8a24, type: 3}
+  goldenFishInterval: 30
   targetWord: MAMA
   alphabet: ABCDEFGHIJKLMNOPQRSTUVWXYZ
   extraFishCount: 10

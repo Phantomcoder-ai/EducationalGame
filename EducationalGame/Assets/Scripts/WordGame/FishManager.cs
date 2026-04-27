@@ -19,6 +19,11 @@ public class FishManager : MonoBehaviour
     public GameObject fuguPrefab;
     public int fuguCount = 1; // сколько фугу спавнить
 
+    [Header("Золотая рыбка")]
+    public GameObject goldenFishPrefab;
+    private float goldenFishTimer = 0f;
+    public float goldenFishInterval = 30f; // каждые 30 секунд шанс появления
+
     [Header("Словарный режим")]
     public string targetWord = "МАМА";
     public string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -28,8 +33,18 @@ public class FishManager : MonoBehaviour
     public MathManager mathManager;
     public int mathFishCount = 15; // сколько рыб с числами спавнить
 
-    
 
+    void Update()
+    {
+        if (goldenFishPrefab == null) return;
+
+        goldenFishTimer += Time.deltaTime;
+        if (goldenFishTimer >= goldenFishInterval)
+        {
+            goldenFishTimer = 0f;
+            TrySpawnGoldenFish();
+        }
+    }
     void Start()
     {
         SpawnAllFish();
@@ -172,6 +187,30 @@ public class FishManager : MonoBehaviour
             newFish.transform.position = new Vector3(x, y, 0);
             movement.speed = Random.Range(1.5f, 3f); // чуть быстрее обычных
             movement.movingRight = (Random.value > 0.5f);
+        }
+    }
+
+    void TrySpawnGoldenFish()
+    {
+        // Проверяем что золотой рыбки ещё нет на сцене
+        GoldenFish existing = FindAnyObjectByType<GoldenFish>();
+        if (existing != null) return;
+
+        GoldenFish prefabScript = goldenFishPrefab.GetComponent<GoldenFish>();
+        float chance = prefabScript != null ? prefabScript.spawnChance : 0.3f;
+
+        if (Random.value <= chance)
+        {
+            GameObject newFish = Instantiate(goldenFishPrefab, Vector3.zero, Quaternion.identity);
+            FishMovement movement = newFish.GetComponent<FishMovement>();
+            if (movement != null)
+            {
+                float x = Random.Range(movement.minX, movement.maxX);
+                float y = Random.Range(movement.minY, movement.maxY);
+                newFish.transform.position = new Vector3(x, y, 0);
+                movement.movingRight = (Random.value > 0.5f);
+            }
+            Debug.Log("Золотая рыбка появилась!");
         }
     }
 }

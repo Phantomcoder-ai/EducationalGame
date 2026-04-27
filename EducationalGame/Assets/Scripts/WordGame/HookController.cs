@@ -207,11 +207,27 @@ public class HookController : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        var fishMove = other.GetComponentInParent<FishMovement>();
-        if (fishMove != null && fishInRange == fishMove.gameObject)
+        // Проверяем фугу
+        FishFugu fugu = other.GetComponentInParent<FishFugu>();
+        if (fugu != null)
         {
-            fishInRange = null;
-            Debug.Log("Рыба покинула зону крючка.");
+            fugu.Explode();
+            return;
+        }
+
+        // Проверяем золотую рыбку
+        GoldenFish golden = other.GetComponentInParent<GoldenFish>();
+        if (golden != null)
+        {
+            golden.Catch();
+            return;
+        }
+
+        var fishMove = other.GetComponentInParent<FishMovement>();
+        if (fishMove != null)
+        {
+            fishInRange = fishMove.gameObject;
+            Debug.Log("Рыба в зоне крючка. Нажми Enter, чтобы поймать.");
         }
     }
 

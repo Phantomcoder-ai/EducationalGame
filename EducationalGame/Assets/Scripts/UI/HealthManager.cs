@@ -53,4 +53,12 @@ public class HealthManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("ResultScene");
     }
+
+    public void Heal(int amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        UpdateUI();
+        Debug.Log("Восстановлено здоровье: " + currentHealth);
+    }
 }
