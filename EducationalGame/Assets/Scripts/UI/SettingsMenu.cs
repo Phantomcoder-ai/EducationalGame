@@ -1,4 +1,4 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
@@ -8,12 +8,14 @@ public class SettingsMenu : MonoBehaviour
     [Header("UI")]
     public GameObject settingsPanel;
     public TMP_Dropdown resolutionDropdown;
+    public TextMeshProUGUI fullscreenButtonText;
 
     private Resolution[] resolutions;
+    private int selectedResolutionIndex;
+    private bool selectedFullscreen;
 
     void Start()
     {
-        Screen.fullScreen = true; // по умолчанию полноэкранный
         settingsPanel.SetActive(false);
         LoadResolutions();
         LoadSettings();
@@ -22,16 +24,18 @@ public class SettingsMenu : MonoBehaviour
     void LoadResolutions()
     {
         resolutions = Screen.resolutions;
-
         resolutionDropdown.ClearOptions();
-        List<string> options = new List<string>();
 
+        List<string> options = new List<string>();
+        HashSet<string> added = new HashSet<string>();
         int currentIndex = 0;
+
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = $"{resolutions[i].width} x {resolutions[i].height}";
-            if (!options.Contains(option))
-                options.Add(option);
+            if (added.Contains(option)) continue;
+            added.Add(option);
+            options.Add(option);
 
             if (resolutions[i].width == Screen.currentResolution.width &&
                 resolutions[i].height == Screen.currentResolution.height)
@@ -39,18 +43,19 @@ public class SettingsMenu : MonoBehaviour
         }
 
         resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentIndex;
+        resolutionDropdown.value = PlayerPrefs.GetInt("ResolutionIndex", currentIndex);
         resolutionDropdown.RefreshShownValue();
+
+        selectedResolutionIndex = resolutionDropdown.value;
     }
 
     void LoadSettings()
     {
-        // Загружаем сохранённые настройки
-        bool isFullscreen = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
-        Screen.fullScreen = isFullscreen;
+        selectedFullscreen = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
+        Screen.fullScreen = selectedFullscreen;
 
-        int resIndex = PlayerPrefs.GetInt("ResolutionIndex", resolutionDropdown.value);
-        resolutionDropdown.value = resIndex;
+        if (fullscreenButtonText != null)
+            fullscreenButtonText.text = selectedFullscreen ? "OKNO" : "PEЕЃNY EKRAN";
     }
 
     public void OpenSettings()
@@ -63,25 +68,35 @@ public class SettingsMenu : MonoBehaviour
         settingsPanel.SetActive(false);
     }
 
-    public void SetResolution(int index)
+    // РџСЂРѕСЃС‚Рѕ Р·Р°РїРѕРјРёРЅР°РµРј РІС‹Р±РѕСЂ вЂ” РЅРµ РїСЂРёРјРµРЅСЏРµРј СЃСЂР°Р·Сѓ
+    public void OnResolutionChanged(int index)
     {
-        // Парсим выбранное разрешение из текста дропдауна
-        string selected = resolutionDropdown.options[index].text;
+        selectedResolutionIndex = index;
+    }
+
+    public void ToggleFullscreen()
+    {
+        selectedFullscreen = !selectedFullscreen;
+        if (fullscreenButtonText != null)
+            fullscreenButtonText.text = selectedFullscreen ? "OKNO" : "PEЕЃNY EKRAN";
+    }
+
+    // РџСЂРёРјРµРЅСЏРµРј РІСЃС‘ СЃСЂР°Р·Сѓ РїРѕ РєРЅРѕРїРєРµ
+    public void ApplySettings()
+    {
+        // РџСЂРёРјРµРЅСЏРµРј СЂР°Р·СЂРµС€РµРЅРёРµ
+        string selected = resolutionDropdown.options[selectedResolutionIndex].text;
         string[] parts = selected.Split('x');
         int width = int.Parse(parts[0].Trim());
         int height = int.Parse(parts[1].Trim());
 
-        Screen.SetResolution(width, height, Screen.fullScreen);
-        PlayerPrefs.SetInt("ResolutionIndex", index);
+        Screen.SetResolution(width, height, selectedFullscreen);
+
+        // РЎРѕС…СЂР°РЅСЏРµРј
+        PlayerPrefs.SetInt("ResolutionIndex", selectedResolutionIndex);
+        PlayerPrefs.SetInt("Fullscreen", selectedFullscreen ? 1 : 0);
         PlayerPrefs.Save();
 
-        Debug.Log($"Разрешение: {width}x{height}");
-    }
-
-    public void SetFullscreen(bool isFullscreen)
-    {
-        Screen.fullScreen = isFullscreen;
-        PlayerPrefs.SetInt("Fullscreen", isFullscreen ? 1 : 0);
-        PlayerPrefs.Save();
+        Debug.Log($"РџСЂРёРјРµРЅРµРЅРѕ: {width}x{height}, fullscreen={selectedFullscreen}");
     }
 }
