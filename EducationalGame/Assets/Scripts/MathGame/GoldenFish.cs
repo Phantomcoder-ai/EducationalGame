@@ -5,8 +5,8 @@ public class GoldenFish : MonoBehaviour
 {
     [Header("Настройки")]
     public float spawnChance = 0.3f;    // шанс появления (30%)
-    public float lifetime = 10f;         // сколько секунд живёт на сцене
-    public float speedMultiplier = 2f;   // быстрее обычных рыб
+    public float lifetime = 30f;         // сколько секунд живёт на сцене
+    public float speedMultiplier = 3.5f;   // быстрее обычных рыб
 
     private bool caught = false;
 

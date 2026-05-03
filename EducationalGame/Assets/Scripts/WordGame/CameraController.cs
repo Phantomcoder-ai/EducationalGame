@@ -41,8 +41,7 @@ public class CameraController : MonoBehaviour
                 if (!darknessTriggered && darknessController != null)
                 {
                     bool shouldBeDark = LevelManager.Instance != null &&
-                    LevelManager.Instance.correctAnswersThisLevel >= 3 &&
-                    LevelManager.Instance.correctAnswersThisLevel < 5;
+                    LevelManager.Instance.correctAnswersThisLevel >= LevelManager.Instance.darknessStartAnswer;
                     if (shouldBeDark)
                     {
                         darknessTriggered = true;

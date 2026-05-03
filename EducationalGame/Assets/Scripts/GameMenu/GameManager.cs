@@ -21,18 +21,6 @@ public class GameManager : MonoBehaviour
     [Header("Transition Settings")]
     public float transitionTime = 1f;
 
-    /*void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(game0Object);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }*/
 
     void Start()
     {
@@ -52,6 +40,16 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoadLevel("WordPlaying"));
     }
 
+    public void QuitGame()
+    {
+        Time.timeScale = 1f;
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+    Application.Quit();
+#endif
+    }
+
     public void StartMathMode()
     {
         currentState = GameState.MathPlaying;
@@ -63,6 +61,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
         SceneManager.LoadScene(sceneName);
     }
+
 }
 /*
 using System.Collections;

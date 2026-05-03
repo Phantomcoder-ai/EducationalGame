@@ -21,23 +21,24 @@ public class WordManager : MonoBehaviour
         public List<string> words = new List<string>();
     }
 
-    [Header("Слова по уровням")]
-    public List<LevelWordList> wordLists = new List<LevelWordList>();
-
+    private List<LevelWordList> wordLists = new List<LevelWordList>();
+    private List<string> usedWords = new List<string>();
     private string targetWord = "";
     private List<char> collectedLetters = new List<char>();
     private int nextExpectedIndex = 0; // для строгого порядка
 
-    void Start()
+    void Awake()
     {
         InitializeDefaultWords();
+    }
+
+    void Start()
+    {
         SetDifficulty(1);
     }
 
     void InitializeDefaultWords()
     {
-        // Заполняем только если список пустой
-        if (wordLists.Count > 0) return;
 
         // Уровень 1 — 3-4 буквы
         wordLists.Add(new LevelWordList
@@ -92,10 +93,9 @@ public class WordManager : MonoBehaviour
 
     public void SetDifficulty(int level)
     {
-        // Включаем механики по уровню
-        strictOrder = level >= 2;
-        hiddenLetters = level >= 3;
-
+        strictOrder = level >= 3;
+        hiddenLetters = level >= 4;
+        usedWords.Clear(); // новый уровень — новые слова
         LoadNewWord(level);
     }
 
@@ -118,7 +118,19 @@ public class WordManager : MonoBehaviour
             return;
         }
 
-        targetWord = list.words[Random.Range(0, list.words.Count)].ToUpper();
+        // Если все слова уровня использованы — сбрасываем историю
+        if (usedWords.Count >= list.words.Count)
+        {
+            Debug.Log("Все слова использованы, сбрасываем историю!");
+            usedWords.Clear();
+        }
+
+        // Берём только неиспользованные слова
+        List<string> available = list.words.FindAll(w => !usedWords.Contains(w.ToUpper()));
+
+        targetWord = available[Random.Range(0, available.Count)].ToUpper();
+        usedWords.Add(targetWord);
+
         collectedLetters.Clear();
         nextExpectedIndex = 0;
 
@@ -152,13 +164,9 @@ public class WordManager : MonoBehaviour
         if (!hiddenLetters)
             return targetWord;
 
-        // Скрываем чётные буквы: RYBA → R_B_
         string display = "";
         for (int i = 0; i < targetWord.Length; i++)
-        {
             display += (i % 2 == 1) ? "_" : targetWord[i].ToString();
-            if (i < targetWord.Length - 1) display += " ";
-        }
         return display;
     }
 
@@ -238,7 +246,6 @@ public class WordManager : MonoBehaviour
 
     string GetCurrentDisplay()
     {
-        // Строим отображение на основе позиций в целевом слове
         string display = "";
         List<char> temp = new List<char>(collectedLetters);
 
@@ -248,14 +255,14 @@ public class WordManager : MonoBehaviour
             if (temp.Contains(needed))
             {
                 display += needed;
-                temp.Remove(needed); // убираем одно вхождение
+                temp.Remove(needed);
             }
             else
             {
                 display += "_";
             }
-
-            if (i < targetWord.Length - 1) display += " ";
+            if (i < targetWord.Length - 1)
+                display += " ";
         }
         return display;
     }

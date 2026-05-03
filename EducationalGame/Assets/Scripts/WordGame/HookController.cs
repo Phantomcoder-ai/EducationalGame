@@ -121,24 +121,34 @@ public class HookController : MonoBehaviour
                 // Обработка пойманной рыбы: сначала пытаемся распознать тип и передать в соответствующий менеджер
                 if (caughtFish != null)
                 {
-                    // 1. Проверяем, не математическая ли это рыба
-                    FishMath mathData = caughtFish.GetComponent<FishMath>();
-                    if (mathData != null && mathManager != null)
+                    // Золотая рыбка
+                    GoldenFish golden = caughtFish.GetComponent<GoldenFish>();
+                    if (golden != null)
                     {
-                        if (mathManager.CheckAnswer(mathData.assignedNumber)) Destroy(caughtFish);
-                        else ReleaseFishBackToWater();
+                        golden.Catch();
+                        caughtFish = null;
                     }
-                    // 2. Иначе проверяем, не буквенная ли это рыба
+                    // Математическая рыба
                     else
                     {
-                        FishLetter letterData = caughtFish.GetComponent<FishLetter>();
-                        if (letterData != null && wordManager != null)
+                        FishMath mathData = caughtFish.GetComponent<FishMath>();
+                        if (mathData != null && mathManager != null)
                         {
-                            if (wordManager.AddLetter(letterData.assignedLetter)) Destroy(caughtFish);
+                            if (mathManager.CheckAnswer(mathData.assignedNumber)) Destroy(caughtFish);
                             else ReleaseFishBackToWater();
                         }
+                        // Буквенная рыба
+                        else
+                        {
+                            FishLetter letterData = caughtFish.GetComponent<FishLetter>();
+                            if (letterData != null && wordManager != null)
+                            {
+                                if (wordManager.AddLetter(letterData.assignedLetter)) Destroy(caughtFish);
+                                else ReleaseFishBackToWater();
+                            }
+                        }
+                        caughtFish = null;
                     }
-                    caughtFish = null;
                 }
                 // Включаем аниматор обратно для следующего заброса
                 Animator anim = GetComponent<Animator>();
@@ -185,18 +195,24 @@ public class HookController : MonoBehaviour
     // Фиксируем рыбу в зоне крючка — но не приклеиваем!
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Игнорируем все столкновения пока крючок опускается
-        if (isIntro) return;
-
         // Проверяем фугу
         FishFugu fugu = other.GetComponentInParent<FishFugu>();
         if (fugu != null)
         {
             fugu.Explode();
-            return; // крючок не поднимается, просто взрыв
+            return;
         }
 
-        // Ищем компонент движения рыбы в родителе/самом объекте
+        // Золотая рыбка — запоминаем как обычную рыбу
+        GoldenFish golden = other.GetComponentInParent<GoldenFish>();
+        if (golden != null)
+        {
+            fishInRange = golden.gameObject;
+            Debug.Log("Золотая рыбка в зоне! Нажми Enter.");
+            return;
+        }
+
+        // Обычная рыба
         var fishMove = other.GetComponentInParent<FishMovement>();
         if (fishMove != null)
         {

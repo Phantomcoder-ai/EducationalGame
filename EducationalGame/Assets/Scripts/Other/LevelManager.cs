@@ -11,8 +11,13 @@ public class LevelManager : MonoBehaviour
     public Mode gameMode = Mode.Math;
 
     [Header("Настройки уровней")]
-    public int correctAnswersPerLevel = 7;
+    public int correctAnswersPerLevelMath = 10;
+    public int correctAnswersPerLevelWord = 5;
     public int maxLevels = 5;
+
+    [Header("Триггеры внутри уровня")]
+    public int sharkSpawnAnswer = 2;      // после какого ответа появляется акула
+    public int darknessStartAnswer = 1;   // после какого ответа включается темнота
 
     [Header("Текущее состояние")]
     public int currentLevel = 1;
@@ -49,21 +54,11 @@ public class LevelManager : MonoBehaviour
         GameSessionData.combo = comboCount;
 
         // Триггеры внутри уровня
-        if (correctAnswersThisLevel == 2)
+        if (correctAnswersThisLevel == sharkSpawnAnswer)
             fishManager?.SpawnShark();
 
-        if (correctAnswersThisLevel == 5)
-        {
-            // Темнота выключается
-            DarknessController darkness = FindAnyObjectByType<DarknessController>();
-            if (darkness != null) darkness.DisableDarkness();
-
-            // Сбрасываем флаг в камере чтобы темнота могла включиться снова на следующем уровне
-            CameraController cam = FindAnyObjectByType<CameraController>();
-            if (cam != null) cam.darknessTriggered = false;
-        }
-
-        if (correctAnswersThisLevel >= correctAnswersPerLevel)
+        int answersNeeded = gameMode == Mode.Math ? correctAnswersPerLevelMath : correctAnswersPerLevelWord;
+        if (correctAnswersThisLevel >= answersNeeded)
             NextLevel();
     }
 
@@ -141,6 +136,15 @@ public class LevelManager : MonoBehaviour
     void ResetLevelTriggers()
     {
 
+        // Выключаем темноту
+        DarknessController darkness = FindAnyObjectByType<DarknessController>();
+        if (darkness != null) darkness.DisableDarkness();
+
+        // Сбрасываем флаг камеры
+        CameraController cam = FindAnyObjectByType<CameraController>();
+        if (cam != null) cam.darknessTriggered = false;
+
+        // Убираем акулу
         GameObject shark = GameObject.FindGameObjectWithTag("Shark");
         if (shark != null) Destroy(shark);
     }
