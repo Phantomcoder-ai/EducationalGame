@@ -79,6 +79,7 @@ public class LevelManager : MonoBehaviour
         correctAnswersThisLevel = 0;
         comboCount = 0;
 
+        // Проверяем ПОСЛЕ того как должны были бы перейти
         if (currentLevel >= maxLevels)
         {
             GameSessionData.isVictory = true;
@@ -90,19 +91,13 @@ public class LevelManager : MonoBehaviour
 
         currentLevel++;
 
-        // Останавливаем таймер на время попапа
         if (timerController != null)
             timerController.StopTimer();
 
-        // Показываем попап
         if (LevelUpPopup.Instance != null)
             LevelUpPopup.Instance.Show(currentLevel, totalScore);
         else
-        {
-            Debug.LogError("LevelUpPopup.Instance == null!");
-            OnLevelUpPopupFinished(); // если попапа нет — сразу продолжаем
-        }
-            
+            OnLevelUpPopupFinished();
     }
 
     // Вызывается когда попап закрылся

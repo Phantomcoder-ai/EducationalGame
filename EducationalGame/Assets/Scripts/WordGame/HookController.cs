@@ -226,7 +226,7 @@ public class HookController : MonoBehaviour
         var fishMove = other.GetComponentInParent<FishMovement>();
         if (fishMove != null)
         {
-            fishInRange = fishMove.gameObject;
+            fishInRange = null; // сбрасываем всегда, не проверяя совпадение
             Debug.Log("Рыба в зоне крючка. Нажми Enter, чтобы поймать.");
         }
     }
