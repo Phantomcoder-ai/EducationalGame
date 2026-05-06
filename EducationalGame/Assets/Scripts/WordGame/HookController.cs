@@ -21,7 +21,6 @@ public class HookController : MonoBehaviour
     public CameraController camControl;
     public GameSceneController gameSceneController;
 
-
     public void OnCastAnimationFinished()
     {
         // 1. Находим компонент Animator на этом объекте
@@ -68,22 +67,24 @@ public class HookController : MonoBehaviour
         // 2. СВОБОДНАЯ ИГРА (WASD)
         if (canMove)
         {
-            float minX = -8f;
-            float maxX = 8f;
-            float minY = -16.5f; // Дно для крючка (может быть глубже, чем камера)
+            // Динамические границы из камеры
+            Camera cam = Camera.main;
+            float halfWidth = cam != null ? cam.orthographicSize * cam.aspect - 0.1f : 8f;
+            float minX = -halfWidth;
+            float maxX = halfWidth;
+            float minY = -16.5f;
             float maxY = -7f;
+
             float moveX = Input.GetAxis("Horizontal");
             float moveY = Input.GetAxis("Vertical");
 
             Vector3 move = new Vector3(moveX, moveY, 0) * speed * Time.deltaTime;
             transform.position += move;
 
-            // ОГРАНИЧИТЕЛИ: Крючок не выйдет за эти рамки
             float cx = Mathf.Clamp(transform.position.x, minX, maxX);
             float cy = Mathf.Clamp(transform.position.y, minY, maxY);
             transform.position = new Vector3(cx, cy, 0);
 
-            // Захват рыбы — только по Enter, когда рыба в зоне
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
             {
                 if (fishInRange != null && caughtFish == null)

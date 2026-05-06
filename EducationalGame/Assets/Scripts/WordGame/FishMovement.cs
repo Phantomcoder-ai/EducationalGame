@@ -22,13 +22,23 @@ public class FishMovement : MonoBehaviour
 
     void Start()
     {
-        
-        // Случайно выбираем начальное направление
+        UpdateBoundsFromCamera();
+        Debug.Log($"FishMovement bounds: minX={minX}, maxX={maxX}");
         movingRight = Random.value > 0.5f;
         UpdateFacing();
-
-        // Сохраняем исходную скорость
         originalSpeed = speed;
+    }
+
+    void UpdateBoundsFromCamera()
+    {
+        Camera cam = Camera.main;
+        if (cam != null)
+        {
+            float width = cam.orthographicSize * cam.aspect;
+            minX = -width - 2f;
+            maxX = width + 2f;
+            // minY и maxY не трогаем — они зависят от глубины уровня
+        }
     }
 
     void Update()
@@ -54,25 +64,22 @@ public class FishMovement : MonoBehaviour
     IEnumerator RespawnFish(float spawnX)
     {
         isWaiting = true;
-        // Сначала спрятать рыбу (можно отключить спрайт или переместить вниз)
-        if (fishBodySprite != null)
-            fishBodySprite.enabled = false;
 
         SpriteRenderer[] allSprites = GetComponentsInChildren<SpriteRenderer>();
         foreach (var s in allSprites) s.enabled = false;
 
-        // Подождать пару секунд
         float delay = Random.Range(1.0f, 4.0f);
         yield return new WaitForSeconds(delay);
 
-        // Появиться на другой стороне
+        // Пересчитываем границы перед респавном
+        UpdateBoundsFromCamera();
+
         float randomY = Random.Range(minY, maxY);
         transform.position = new Vector3(spawnX, randomY, transform.position.z);
 
-        // Сменить направление
+        movingRight = spawnX < 0;
         UpdateFacing();
 
-        // 5. Показываем рыбу обратно
         foreach (var s in allSprites) s.enabled = true;
         isWaiting = false;
     }

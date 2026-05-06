@@ -2531,8 +2531,8 @@ Transform:
   m_GameObject: {fileID: 1167213708}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09, y: -8.86, z: 0}
-  m_LocalScale: {x: 3.2342494, y: 4.136839, z: 1}
+  m_LocalPosition: {x: -0.3257, y: -8.86, z: 0}
+  m_LocalScale: {x: 3.3471246, y: 4.136839, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2870,7 +2870,7 @@ GameObject:
   - component: {fileID: 1427067049}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3125,7 +3125,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1478920955
@@ -3373,8 +3373,8 @@ Transform:
   m_GameObject: {fileID: 1526303422}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1382, y: 4.9441, z: 0}
-  m_LocalScale: {x: 3.1892438, y: 2.0227828, z: 1}
+  m_LocalPosition: {x: -0.297, y: 6.196, z: 0}
+  m_LocalScale: {x: 3.35, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3413,7 +3413,7 @@ MonoBehaviour:
   correctAnswersPerLevelWord: 2
   maxLevels: 5
   sharkSpawnAnswer: 2
-  darknessStartAnswer: 3
+  darknessStartAnswer: 1
   currentLevel: 1
   correctAnswersThisLevel: 0
   totalScore: 0
@@ -3449,7 +3449,7 @@ GameObject:
   - component: {fileID: 1720392280}
   m_Layer: 0
   m_Name: CameraParent
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
