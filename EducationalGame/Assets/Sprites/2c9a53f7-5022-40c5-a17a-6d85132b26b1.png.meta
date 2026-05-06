@@ -518,7 +518,7 @@ TextureImporter:
         width: 127
         height: 123
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -527,6 +527,72 @@ TextureImporter:
       bones: []
       spriteID: 325aa8664926b1f42a7b7da901c3c223
       internalID: 1408767489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2c9a53f7-5022-40c5-a17a-6d85132b26b1_15
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 382
+        width: 115
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fc29ce7ad843484fb28cb93ee204789
+      internalID: -1763650687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2c9a53f7-5022-40c5-a17a-6d85132b26b1_16
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 381
+        width: 133
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bed9fd7385609b4a913d0ea90d27588
+      internalID: 1222352298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 2c9a53f7-5022-40c5-a17a-6d85132b26b1_17
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 753
+        width: 117
+        height: 131
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f09a0f9a166839841bcde71e7e58573b
+      internalID: -724035864
       vertices: []
       indices: 
       edges: []
@@ -552,6 +618,9 @@ TextureImporter:
       2c9a53f7-5022-40c5-a17a-6d85132b26b1_12: 1854293174
       2c9a53f7-5022-40c5-a17a-6d85132b26b1_13: -1379955709
       2c9a53f7-5022-40c5-a17a-6d85132b26b1_14: 1408767489
+      2c9a53f7-5022-40c5-a17a-6d85132b26b1_15: -1763650687
+      2c9a53f7-5022-40c5-a17a-6d85132b26b1_16: 1222352298
+      2c9a53f7-5022-40c5-a17a-6d85132b26b1_17: -724035864
       2c9a53f7-5022-40c5-a17a-6d85132b26b1_2: 868075234
       2c9a53f7-5022-40c5-a17a-6d85132b26b1_3: -1021056944
       2c9a53f7-5022-40c5-a17a-6d85132b26b1_35: 1943222937
