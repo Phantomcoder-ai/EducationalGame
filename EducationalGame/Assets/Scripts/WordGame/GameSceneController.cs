@@ -11,6 +11,7 @@ public class GameSceneController : MonoBehaviour
 
     void Update()
     {
+        TutorialManager.Instance?.OnGameStart();
         // Проверяем нажатие Пробела и что игра еще не началась
         if (Input.GetKeyDown(KeyCode.Space) && !isFishingStarted)
         {

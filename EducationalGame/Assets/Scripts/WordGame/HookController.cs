@@ -219,6 +219,7 @@ public class HookController : MonoBehaviour
         {
             fishInRange = fishMove.gameObject;
             Debug.Log("Рыба в зоне крючка. Нажми Enter, чтобы поймать.");
+            TutorialManager.Instance?.OnFishInRange();
         }
     }
 

@@ -55,8 +55,9 @@ public class DarknessController : MonoBehaviour
 
     public void EnableDarkness()
     {
+        TutorialManager.Instance?.OnDarknessEnabled();
         if (isActive) return; // уже включено
-
+        
         isActive = true;
         fadeTimer = 0f;
         isFading = true;

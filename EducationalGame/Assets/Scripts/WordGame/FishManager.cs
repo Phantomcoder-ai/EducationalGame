@@ -158,6 +158,7 @@ public class FishManager : MonoBehaviour
     // --- АКУЛА ---
     public void SpawnShark()
     {
+        TutorialManager.Instance?.OnSharkAppeared();
         if (activeShark != null) return;
 
         // Берём границы из любой живой рыбы
@@ -187,6 +188,7 @@ public class FishManager : MonoBehaviour
             newFish.transform.position = new Vector3(x, y, 0);
             movement.speed = Random.Range(1.5f, 3f); // чуть быстрее обычных
             movement.movingRight = (Random.value > 0.5f);
+            TutorialManager.Instance?.OnFuguAppeared();
         }
     }
 
@@ -211,6 +213,7 @@ public class FishManager : MonoBehaviour
                 movement.movingRight = (Random.value > 0.5f);
             }
             Debug.Log("Золотая рыбка появилась!");
+            TutorialManager.Instance?.OnGoldenFishAppeared();
         }
     }
 }
