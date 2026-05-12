@@ -2447,8 +2447,8 @@ Transform:
   m_GameObject: {fileID: 1131893631}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.002, y: -0.009, z: 0}
-  m_LocalScale: {x: 0.07, y: 0.07, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.07, y: 0.08, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1440105341}
@@ -3120,8 +3120,8 @@ Transform:
   m_GameObject: {fileID: 1440105339}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6393, y: -9.6315, z: 0}
-  m_LocalScale: {x: 13.031223, y: 9.782636, z: 0.26332748}
+  m_LocalPosition: {x: 5.639, y: -13.5472, z: 0}
+  m_LocalScale: {x: 15, y: 11.25, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1131893632}
@@ -3483,7 +3483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 1353167826}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  normalColor: {r: 0, g: 0, b: 0, a: 1}
   urgentColor: {r: 1, g: 0, b: 0, a: 1}
   urgentThreshold: 5
 --- !u!4 &1657467789

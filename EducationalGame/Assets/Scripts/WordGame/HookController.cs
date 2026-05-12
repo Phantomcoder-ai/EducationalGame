@@ -113,12 +113,12 @@ public class HookController : MonoBehaviour
                 isReelingIn = false;
                 camControl.currentState = CameraController.CameraState.AtBeach;
                 // Останавливаем и сбрасываем таймер
-                TimerController timer = FindAnyObjectByType<TimerController>();
+                /*TimerController timer = FindAnyObjectByType<TimerController>();
                 if (timer != null)
                 {
                     timer.StopTimer();
                     timer.ResetTimer();
-                }
+                }*/
                 // Обработка пойманной рыбы: сначала пытаемся распознать тип и передать в соответствующий менеджер
                 if (caughtFish != null)
                 {
@@ -299,7 +299,13 @@ public class HookController : MonoBehaviour
 
         // Сбрасываем флаг зоны (мы уже поймали эту рыбу)
         if (fishInRange == caughtFish) fishInRange = null;
-
+        // Останавливаем и сбрасываем таймер
+        TimerController timer = FindAnyObjectByType<TimerController>();
+        if (timer != null)
+        {
+            timer.StopTimer();
+            timer.ResetTimer();
+        }
         Debug.Log("Рыба прикреплена к крючку.");
     }
 
