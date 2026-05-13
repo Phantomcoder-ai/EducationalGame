@@ -93,24 +93,33 @@ public class SharkMovement : MonoBehaviour
         if (other.CompareTag("Hook"))
         {
             HookController hook = other.GetComponent<HookController>();
-            // Не атакуем крючок пока он опускается или уже поднимается
-            if (hook != null && (!hook.canMove)) return;
+            if (hook == null) return;
+
+            // Во время опускания — акула не реагирует вообще
+            if (hook.isIntro) return;
+
+            // Во время свободного движения ИЛИ подъёма — акула атакует
+            if (!hook.canMove && !hook.isReelingIn) return;
 
             Debug.Log("<color=red>Акула ударила крючок!</color>");
 
             if (CameraShake.Instance != null)
-            {
                 CameraShake.Instance.Shake(0.3f, 0.4f);
-            }
-            
-            // 2. Заставляем крючок подняться
-            if (hook != null)
-            {
-                hook.ForceReturn(); // Отпускаем рыбу обратно в воду
-            }
+
+            /*AudioManager.Instance?.PlayShark();*/
+
             if (HealthManager.Instance != null)
-            {
                 HealthManager.Instance.TakeDamage(1);
+
+            // Если крючок поднимается и на нём есть рыба — акула её съедает
+            if (hook.isReelingIn)
+            {
+                hook.SharkEatFish(); // новый метод — см. ниже
+            }
+            else
+            {
+                // Обычная атака — крючок принудительно поднимается
+                hook.ForceReturn();
             }
 
             StartCoroutine(StunShark());

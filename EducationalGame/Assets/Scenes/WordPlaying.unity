@@ -2289,6 +2289,7 @@ MonoBehaviour:
   fishPrefabs:
   - {fileID: 8690786391197387751, guid: b63070d7119629b49bdcb7c7f0965f74, type: 3}
   - {fileID: 8690786391197387751, guid: 5a5a3753a28a1ae4d9e43da2c1966675, type: 3}
+  - {fileID: 8690786391197387751, guid: 8ec667de783cb8e4eac46dc9f7f8c7c9, type: 3}
   sharkPrefab: {fileID: 544052312838638481, guid: a660870a96811ae48ac11a7b6e4f6528, type: 3}
   fuguPrefab: {fileID: 8690786391197387751, guid: ae8ab267b5c58f64ea9814c89fa48885, type: 3}
   fuguCount: 1
@@ -3197,8 +3198,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameMode: 1
-  correctAnswersPerLevelMath: 10
-  correctAnswersPerLevelWord: 2
+  correctAnswersPerLevelMath: 5
+  correctAnswersPerLevelWord: 3
   maxLevels: 5
   sharkSpawnAnswer: 2
   darknessStartAnswer: 1

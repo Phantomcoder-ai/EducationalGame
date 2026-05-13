@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 2884428726901173233}
   - component: {fileID: 3903246987452344945}
   m_Layer: 0
-  m_Name: Fish_B
+  m_Name: Fish_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -424,8 +424,8 @@ Transform:
   m_GameObject: {fileID: 8737864840425595644}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.35, y: -0.475, z: 0}
-  m_LocalScale: {x: -0.11501, y: 0.11501, z: 0}
+  m_LocalPosition: {x: 0.35, y: -0.473, z: 0}
+  m_LocalScale: {x: -0.09, y: 0.09, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6002585676132552695}
@@ -474,12 +474,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 37
-  m_Sprite: {fileID: -3066503393598026269, guid: 14445fd1377bb944889220d233f17f9b, type: 3}
+  m_Sprite: {fileID: 5639210824050873060, guid: b0096507b99211d4782b66adaefe4c0c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1.86, y: 1.33}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -519,5 +519,5 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.76, y: 0}
-  m_Radius: 3.6
+  m_Offset: {x: 2.03, y: 0}
+  m_Radius: 4.93

@@ -51,13 +51,13 @@ public class FishMovement : MonoBehaviour
         // Проверка выхода за границы
         if (movingRight && transform.position.x >= maxX)
         {
-            // Уплыла вправо -> респаун слева
-            StartCoroutine(RespawnFish(minX));
+            // Уплыла влево -> респаун справа
+            StartCoroutine(RespawnFish(maxX));
         }
         else if (!movingRight && transform.position.x <= minX)
         {
-            // Уплыла влево -> респаун справа
-            StartCoroutine(RespawnFish(maxX));
+            // Уплыла вправо -> респаун слева
+            StartCoroutine(RespawnFish(minX));
         }
     }
 
@@ -96,7 +96,7 @@ public class FishMovement : MonoBehaviour
             Vector3 leafPos = leafTransform.localPosition;
             // Если плывем вправо, листок должен быть слева от центра (сзади)
             // Если плывем влево, листок должен быть справа от центра (сзади)
-            float xOffset = movingRight ? -1f : 2f; // Настрой это число под свою рыбу
+            float xOffset = movingRight ? -1f : 1.7f; // Настрой это число под свою рыбу
             leafTransform.localPosition = new Vector3(xOffset, leafPos.y, leafPos.z);
         }
     }

@@ -1787,6 +1787,8 @@ MonoBehaviour:
   speed: 5
   introFallSpeed: 5
   canMove: 0
+  isIntro: 0
+  isReelingIn: 0
   wordManager: {fileID: 0}
   mathManager: {fileID: 1159666051}
   beachPoint: {fileID: 1526303424}
@@ -1825,6 +1827,7 @@ MonoBehaviour:
   fishPrefabs:
   - {fileID: 3638170624501412782, guid: 3c09cb95cd1b2ae48b81090747ca0ad2, type: 3}
   - {fileID: 8018057264892320671, guid: 8099aadec5c736540953a098b7df6571, type: 3}
+  - {fileID: 1436563749830943317, guid: 7146871357c1ed9498bfd72fd1f7725e, type: 3}
   sharkPrefab: {fileID: 544052312838638481, guid: a660870a96811ae48ac11a7b6e4f6528, type: 3}
   fuguPrefab: {fileID: 8690786391197387751, guid: ae8ab267b5c58f64ea9814c89fa48885, type: 3}
   fuguCount: 2
@@ -3380,10 +3383,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameMode: 0
-  correctAnswersPerLevelMath: 3
+  correctAnswersPerLevelMath: 5
   correctAnswersPerLevelWord: 5
   maxLevels: 5
-  sharkSpawnAnswer: 2
+  sharkSpawnAnswer: 1
   darknessStartAnswer: 4
   currentLevel: 1
   correctAnswersThisLevel: 0

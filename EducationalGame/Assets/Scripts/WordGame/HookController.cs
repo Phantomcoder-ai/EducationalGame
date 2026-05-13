@@ -7,9 +7,9 @@ public class HookController : MonoBehaviour
     public float speed = 5f;
     public float introFallSpeed = 5f;
     public bool canMove = false;
-    private bool isIntro = false;
-    private bool isReelingIn = false;
-     
+    public bool isIntro = false; // было private
+    public bool isReelingIn = false; // было private
+
     public WordManager wordManager;
     public MathManager mathManager; // Добавлено: поддержка MathManager
     private GameObject fishInRange = null; // рыба под крючком (в зоне)
@@ -196,6 +196,7 @@ public class HookController : MonoBehaviour
     // Фиксируем рыбу в зоне крючка — но не приклеиваем!
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (!canMove) return;
         // Проверяем фугу
         FishFugu fugu = other.GetComponentInParent<FishFugu>();
         if (fugu != null)
@@ -225,6 +226,8 @@ public class HookController : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
+        // Блокируем пока крючок не в режиме свободного движения
+        if (!canMove) return;
         // Проверяем фугу
         FishFugu fugu = other.GetComponentInParent<FishFugu>();
         if (fugu != null)
@@ -332,6 +335,39 @@ public class HookController : MonoBehaviour
         Debug.Log("Крючок принудительно возвращается вверх!");
     }
 
+    public void SharkEatFish()
+    {
+        // Ищем рыбу среди дочерних объектов крючка
+        foreach (Transform child in transform)
+        {
+            if (child.CompareTag("Fish"))
+            {
+                // Отцепляем от крючка
+                child.SetParent(null);
+
+                // Включаем физику и движение обратно
+                Rigidbody2D rb = child.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    rb.simulated = true;
+                    rb.linearVelocity = Vector2.zero;
+                }
+
+                FishMovement fm = child.GetComponent<FishMovement>();
+                if (fm == null) fm = child.GetComponentInChildren<FishMovement>();
+                if (fm != null) fm.enabled = true;
+
+                // Возвращаем в случайное место воды
+                float randomX = Random.Range(-8f, 8f);
+                float randomY = Random.Range(-15f, -8f);
+                child.position = new Vector3(randomX, randomY, 0);
+
+                Debug.Log("<color=red>Акула съела рыбу! Рыба вернулась в воду.</color>");
+                break;
+            }
+        }
+    }
+
     void UpdateVisualDirection()
     {
         if (!canMove) return;
@@ -363,4 +399,5 @@ public class HookController : MonoBehaviour
         DarknessController darkness = FindAnyObjectByType<DarknessController>();
         if (darkness != null) darkness.PauseDarkness();
     }
+
 }

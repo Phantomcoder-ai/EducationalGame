@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7f45bc51af755af4384fe9fcb1d72813
+guid: 34ea7482337fe7348871b0ff0087fa10
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6738874981084737531
-    second: "ChatGPT Image 6 \u043C\u0430\u044F 2026 \u0433., 17_04_51_0"
+      213: -652822320008530650
+    second: Fugu_Fish_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "ChatGPT Image 6 \u043C\u0430\u044F 2026 \u0433., 17_04_51_0"
+      name: Fugu_Fish_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1536
-        height: 1024
+        width: 1701
+        height: 1683
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5005da6a8e4ba72a0800000000000000
-      internalID: -6738874981084737531
+      spriteID: 625f17a0f85b0f6f0800000000000000
+      internalID: -652822320008530650
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      "ChatGPT Image 6 \u043C\u0430\u044F 2026 \u0433., 17_04_51_0": -6738874981084737531
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
