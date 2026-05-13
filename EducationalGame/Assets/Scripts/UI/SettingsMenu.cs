@@ -1,15 +1,50 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
-using System.Collections.Generic;
 
 public class SettingsMenu : MonoBehaviour
 {
     [Header("UI")]
     public GameObject settingsPanel;
 
+    [Header("Слайдеры")]
+    public Slider musicSlider;
+    public Slider sfxSlider;
+
     void Start()
     {
         settingsPanel.SetActive(false);
+
+        // Загружаем сохранённые значения (по умолчанию 1.0)
+        float savedMusic = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        float savedSFX = PlayerPrefs.GetFloat("SFXVolume", 1f);
+
+        // Устанавливаем слайдеры
+        if (musicSlider != null)
+        {
+            musicSlider.value = savedMusic;
+            musicSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
+        }
+
+        if (sfxSlider != null)
+        {
+            sfxSlider.value = savedSFX;
+            sfxSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
+        }
+
+        // Применяем к AudioManager
+        AudioManager.Instance?.SetMusicVolume(savedMusic);
+        AudioManager.Instance?.SetSFXVolume(savedSFX);
+    }
+
+    void OnMusicVolumeChanged(float value)
+    {
+        AudioManager.Instance?.SetMusicVolume(value);
+    }
+
+    void OnSFXVolumeChanged(float value)
+    {
+        AudioManager.Instance?.SetSFXVolume(value);
     }
 
     public void OpenSettings()
@@ -24,8 +59,16 @@ public class SettingsMenu : MonoBehaviour
 
     public void ApplySettings()
     {
-        // Пока пусто — добавим позже
-        Debug.Log("Настройки применены!");
+        // Сохраняем значения
+        if (musicSlider != null)
+            PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
+
+        if (sfxSlider != null)
+            PlayerPrefs.SetFloat("SFXVolume", sfxSlider.value);
+
+        PlayerPrefs.Save();
+
+        Debug.Log("Настройки сохранены!");
         settingsPanel.SetActive(false);
     }
 }

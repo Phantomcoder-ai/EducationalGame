@@ -88,7 +88,7 @@ public class LevelManager : MonoBehaviour
 
         if (timerController != null)
             timerController.StopTimer();
-
+        AudioManager.Instance?.PlayLevelUp();
         if (LevelUpPopup.Instance != null)
             LevelUpPopup.Instance.Show(currentLevel, totalScore);
         else
@@ -111,9 +111,9 @@ public class LevelManager : MonoBehaviour
         // Таймер с 3 уровня — одинаково для обоих режимов
         if (timerController != null)
         {
-            if (currentLevel >= 2)
+            if (currentLevel >= 3)
             {
-                float duration = 20f + (currentLevel - 2) * 5f;
+                float duration = 20f + (currentLevel - 3) * 5f;
                 timerController.SetTimer(duration);
                 timerController.gameObject.SetActive(true);
             }

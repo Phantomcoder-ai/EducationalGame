@@ -11,7 +11,7 @@ public class FishFugu : MonoBehaviour
     {
         if (exploded) return;
         exploded = true;
-
+        AudioManager.Instance?.PlayFugu();
         // Минус жизнь
         if (HealthManager.Instance != null)
             HealthManager.Instance.TakeDamage(1);

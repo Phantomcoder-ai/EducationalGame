@@ -8,6 +8,8 @@ public class GameOverMenu : MonoBehaviour
 
     void Start()
     {
+        AudioManager.Instance?.PlayMusic(AudioManager.Instance.resultMusic);
+        AudioManager.Instance?.PlayGameOver();
         if (resultText != null)
         {
             resultText.text = GameSessionData.isVictory ? "YOU WIN!" : "GAME OVER";

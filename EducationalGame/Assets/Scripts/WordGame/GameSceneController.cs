@@ -9,6 +9,10 @@ public class GameSceneController : MonoBehaviour
 
     private bool isFishingStarted = false;
 
+    void Start()
+    {
+        AudioManager.Instance?.PlayMusic(AudioManager.Instance.gameMusic);
+    }
     void Update()
     {
         TutorialManager.Instance?.OnGameStart();
@@ -23,6 +27,7 @@ public class GameSceneController : MonoBehaviour
     public void StartFishingSequence()
     {
         isFishingStarted = true;
+        AudioManager.Instance?.PlaySplash(); // звук заброса
 
         // Вместо fishermanAnimator используем аниматор, который на самом крючке
         // Мы можем достучаться до него через hookController

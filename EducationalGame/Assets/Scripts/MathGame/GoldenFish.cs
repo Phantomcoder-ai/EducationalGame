@@ -34,7 +34,7 @@ public class GoldenFish : MonoBehaviour
     {
         if (caught) return;
         caught = true;
-
+        AudioManager.Instance?.PlayGoldenFish();
         // Восстанавливаем одно сердечко
         if (HealthManager.Instance != null)
             HealthManager.Instance.Heal(1);

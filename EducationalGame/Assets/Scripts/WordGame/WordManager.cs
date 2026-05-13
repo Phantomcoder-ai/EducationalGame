@@ -187,6 +187,7 @@ public class WordManager : MonoBehaviour
                     HealthManager.Instance.TakeDamage(1);
                 if (LevelManager.Instance != null)
                     LevelManager.Instance.OnWrongAnswer();
+                AudioManager.Instance?.PlayWrong();
                 return false;
             }
 
@@ -270,7 +271,8 @@ public class WordManager : MonoBehaviour
     void OnWordComplete()
     {
         Debug.Log($"Слово {targetWord} собрано!");
-
+        AudioManager.Instance?.PlayCatch();
+        AudioManager.Instance?.PlayCorrect();
         if (currentWordText != null)
             currentWordText.text = targetWord + " [OK]";
 
@@ -281,6 +283,7 @@ public class WordManager : MonoBehaviour
                 scoreText.text = "Score: " + LevelManager.Instance.totalScore;
         }
 
+        
         // Небольшая пауза перед следующим словом
         Invoke(nameof(NextWord), 1.5f);
     }

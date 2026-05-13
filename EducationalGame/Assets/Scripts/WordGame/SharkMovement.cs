@@ -102,7 +102,7 @@ public class SharkMovement : MonoBehaviour
             if (!hook.canMove && !hook.isReelingIn) return;
 
             Debug.Log("<color=red>Акула ударила крючок!</color>");
-
+            AudioManager.Instance?.PlayShark();
             if (CameraShake.Instance != null)
                 CameraShake.Instance.Shake(0.3f, 0.4f);
 

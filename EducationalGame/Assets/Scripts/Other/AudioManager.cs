@@ -10,15 +10,20 @@ public class AudioManager : MonoBehaviour
     public AudioClip resultMusic;
 
     [Header("«вуковые эффекты")]
-    public AudioClip catchFishSound;      // поймал рыбу
-    public AudioClip correctAnswerSound;  // правильный ответ
-    public AudioClip wrongAnswerSound;    // неправильный ответ
-    public AudioClip splashSound;         // заброс удочки
-    public AudioClip levelUpSound;        // повышение уровн€
-    public AudioClip gameOverSound;       // конец игры
+    public AudioClip catchFishSound;
+    public AudioClip correctAnswerSound;
+    public AudioClip wrongAnswerSound;
+    public AudioClip splashSound;
+    public AudioClip levelUpSound;
+    public AudioClip gameOverSound;
+    public AudioClip sharkSound;
+    public AudioClip fuguSound;
+    public AudioClip goldenFishSound;
+    public AudioClip timerUrgentSound;
 
     private AudioSource musicSource;
     private AudioSource sfxSource;
+    private bool timerUrgentPlaying = false;
 
     void Awake()
     {
@@ -33,7 +38,6 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        // ƒва отдельных AudioSource Ч один дл€ музыки, один дл€ эффектов
         AudioSource[] sources = GetComponents<AudioSource>();
         if (sources.Length >= 2)
         {
@@ -53,29 +57,48 @@ public class AudioManager : MonoBehaviour
     // === ћ”«џ ј ===
     public void PlayMusic(AudioClip clip)
     {
-        if (musicSource.clip == clip) return;
+        if (clip == null || musicSource.clip == clip) return;
         musicSource.clip = clip;
         musicSource.Play();
     }
 
     public void StopMusic() => musicSource.Stop();
+    public void SetMusicVolume(float v) => musicSource.volume = v;
+    public void SetSFXVolume(float v) => sfxSource.volume = v;
 
-    public void SetMusicVolume(float volume) => musicSource.volume = volume;
-
-    // === «¬” ќ¬џ≈ Ё‘‘≈ “џ ===
+    // === Ё‘‘≈ “џ ===
     public void PlaySFX(AudioClip clip)
     {
         if (clip == null) return;
         sfxSource.PlayOneShot(clip);
     }
 
-    public void SetSFXVolume(float volume) => sfxSource.volume = volume;
-
     // === ”ƒќЅЌџ≈ ћ≈“ќƒџ ===
-    public void PlayCatchFish() => PlaySFX(catchFishSound);
-    public void PlayCorrectAnswer() => PlaySFX(correctAnswerSound);
-    public void PlayWrongAnswer() => PlaySFX(wrongAnswerSound);
+    public void PlayCatch() => PlaySFX(catchFishSound);
+    public void PlayCorrect() => PlaySFX(correctAnswerSound);
+    public void PlayWrong() => PlaySFX(wrongAnswerSound);
     public void PlaySplash() => PlaySFX(splashSound);
     public void PlayLevelUp() => PlaySFX(levelUpSound);
     public void PlayGameOver() => PlaySFX(gameOverSound);
+    public void PlayShark() => PlaySFX(sharkSound);
+    public void PlayFugu() => PlaySFX(fuguSound);
+    public void PlayGoldenFish() => PlaySFX(goldenFishSound);
+
+    // —рочный таймер Ч зацикленный звук
+    public void StartUrgentTimer()
+    {
+        if (timerUrgentPlaying || timerUrgentSound == null) return;
+        sfxSource.clip = timerUrgentSound;
+        sfxSource.loop = true;
+        sfxSource.Play();
+        timerUrgentPlaying = true;
+    }
+
+    public void StopUrgentTimer()
+    {
+        if (!timerUrgentPlaying) return;
+        sfxSource.loop = false;
+        sfxSource.Stop();
+        timerUrgentPlaying = false;
+    }
 }

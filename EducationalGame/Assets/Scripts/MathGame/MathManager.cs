@@ -121,7 +121,8 @@ public class MathManager : MonoBehaviour
                 
 
             StartCoroutine(ShowNextQuestionDelayed(1.2f));
-           
+            AudioManager.Instance?.PlayCatch();
+            AudioManager.Instance?.PlayCorrect();
             return true;
         }
         else
@@ -131,6 +132,8 @@ public class MathManager : MonoBehaviour
             if (healthManager != null)
                 healthManager.TakeDamage(1);
         }
+        // Где return false:
+        AudioManager.Instance?.PlayWrong();
         return false;
     }
 

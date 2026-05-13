@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     {
         currentState = GameState.Menu;
         Debug.Log("Game started in state: " + currentState);
-
+        AudioManager.Instance?.PlayMusic(AudioManager.Instance.menuMusic);
     }
 
     public void ChangeState(GameState newState)

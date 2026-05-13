@@ -36,9 +36,9 @@ public class TimerController : MonoBehaviour
     {
         if (LevelManager.Instance == null) return;
 
-        if (LevelManager.Instance.currentLevel >= 2)
+        if (LevelManager.Instance.currentLevel >= 3)
         {
-            float duration = 20f + (LevelManager.Instance.currentLevel - 2) * 5f;
+            float duration = 20f + (LevelManager.Instance.currentLevel - 3) * 5f;
             SetTimer(duration);
         }
     }
@@ -59,12 +59,23 @@ public class TimerController : MonoBehaviour
     {
         if (timerText == null) return;
         timerText.text = Mathf.CeilToInt(timeLeft).ToString();
-        timerText.color = timeLeft <= urgentThreshold ? urgentColor : normalColor;
+
+        if (timeLeft <= urgentThreshold)
+        {
+            timerText.color = urgentColor;
+            AudioManager.Instance?.StartUrgentTimer(); // тикающий звук
+        }
+        else
+        {
+            timerText.color = normalColor;
+            AudioManager.Instance?.StopUrgentTimer();
+        }
     }
 
     void OnTimerExpired()
     {
         isRunning = false;
+        AudioManager.Instance?.StopUrgentTimer();
 
         // Поднимаем крючок
         HookController hook = FindAnyObjectByType<HookController>();
