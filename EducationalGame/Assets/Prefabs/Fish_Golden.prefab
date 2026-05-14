@@ -70,7 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnChance: 0.3
   lifetime: 30
-  speedMultiplier: 4
+  speedMultiplier: 3.5
 --- !u!1 &8737864840425595644
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 7216047013238634880}
   m_Layer: 0
   m_Name: FishBody
-  m_TagString: Fish
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.00008154899, w: 1}
   m_LocalPosition: {x: 0.3965, y: 0.3506, z: 0}
-  m_LocalScale: {x: -0.6, y: 0.6, z: 0}
+  m_LocalScale: {x: -0.7, y: 0.7, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6002585676132552695}

@@ -113,19 +113,25 @@ public class FishManager : MonoBehaviour
     GameObject SpawnFishAtRandom()
     {
         GameObject prefab = fishPrefabs[Random.Range(0, fishPrefabs.Length)];
-
-        // Сначала создаём рыбу в нулевой точке
         GameObject newFish = Instantiate(prefab, Vector3.zero, Quaternion.identity);
 
         FishMovement movement = newFish.GetComponent<FishMovement>();
         if (movement != null)
         {
-            // Берём границы прямо из FishMovement
             float x = Random.Range(movement.minX, movement.maxX);
             float y = Random.Range(movement.minY, movement.maxY);
             newFish.transform.position = new Vector3(x, y, 0);
 
-            movement.speed = Random.Range(1f, 2.5f);
+            // Базовая скорость зависит от уровня
+            int level = LevelManager.Instance != null ? LevelManager.Instance.currentLevel : 1;
+            float baseSpeed = 1f + (level - 1) * 0.4f;
+
+            // Рандом ±0.5 от базовой скорости
+            float randomSpeed = Random.Range(baseSpeed - 0.5f, baseSpeed + 0.5f);
+            randomSpeed = Mathf.Max(randomSpeed, 0.5f); // не меньше 0.5
+
+            movement.speed = randomSpeed;
+            movement.originalSpeed = randomSpeed;
             movement.movingRight = (Random.value > 0.5f);
         }
 

@@ -36,9 +36,9 @@ public class TimerController : MonoBehaviour
     {
         if (LevelManager.Instance == null) return;
 
-        if (LevelManager.Instance.currentLevel >= 3)
+        if (LevelManager.Instance.currentLevel >= 2)
         {
-            float duration = 20f + (LevelManager.Instance.currentLevel - 3) * 5f;
+            float duration = 20f + (LevelManager.Instance.currentLevel - 2) * 5f;
             SetTimer(duration);
         }
     }

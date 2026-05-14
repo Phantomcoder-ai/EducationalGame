@@ -14,10 +14,11 @@ public class LevelManager : MonoBehaviour
     public int correctAnswersPerLevelMath = 10;
     public int correctAnswersPerLevelWord = 5;
     public int maxLevels = 5;
-
+    public int darknessLevel = 3; // с какого уровня включается темнота
+    
     [Header("Триггеры внутри уровня")]
-    public int sharkSpawnAnswer = 2;      // после какого ответа появляется акула
-    public int darknessStartAnswer = 1;   // после какого ответа включается темнота
+    public int sharkSpawnAnswer = 2;
+    
 
     [Header("Текущее состояние")]
     public int currentLevel = 1;
@@ -27,8 +28,8 @@ public class LevelManager : MonoBehaviour
 
     [Header("Ссылки")]
     public FishManager fishManager;
-    public MathManager mathManager;   // только для Math режима
-    public WordManager wordManager;   // только для Word режима
+    public MathManager mathManager;
+    public WordManager wordManager;
     public TimerController timerController;
 
     void Awake()
@@ -41,11 +42,16 @@ public class LevelManager : MonoBehaviour
         ApplyLevelSettings();
     }
 
+    // Проверка — можно ли включать темноту
+    public bool IsDarknessAllowed()
+    {
+        return currentLevel >= darknessLevel;
+    }
+
     public void OnCorrectAnswer()
     {
         correctAnswersThisLevel++;
 
-        // Комбо очки
         comboCount++;
         int points = Mathf.Min(10 * comboCount, 80);
         totalScore += points;
@@ -53,11 +59,13 @@ public class LevelManager : MonoBehaviour
         GameSessionData.score = totalScore;
         GameSessionData.combo = comboCount;
 
-        // Триггеры внутри уровня
         if (correctAnswersThisLevel == sharkSpawnAnswer)
             fishManager?.SpawnShark();
 
-        int answersNeeded = gameMode == Mode.Math ? correctAnswersPerLevelMath : correctAnswersPerLevelWord;
+        int answersNeeded = gameMode == Mode.Math
+            ? correctAnswersPerLevelMath
+            : correctAnswersPerLevelWord;
+
         if (correctAnswersThisLevel >= answersNeeded)
             NextLevel();
     }
@@ -69,12 +77,9 @@ public class LevelManager : MonoBehaviour
 
     void NextLevel()
     {
-        Debug.Log("NextLevel вызван! LevelUpPopup.Instance = " + LevelUpPopup.Instance);
-
         correctAnswersThisLevel = 0;
         comboCount = 0;
 
-        // Проверяем ПОСЛЕ того как должны были бы перейти
         if (currentLevel >= maxLevels)
         {
             GameSessionData.isVictory = true;
@@ -88,14 +93,15 @@ public class LevelManager : MonoBehaviour
 
         if (timerController != null)
             timerController.StopTimer();
+
         AudioManager.Instance?.PlayLevelUp();
+
         if (LevelUpPopup.Instance != null)
             LevelUpPopup.Instance.Show(currentLevel, totalScore);
         else
             OnLevelUpPopupFinished();
     }
 
-    // Вызывается когда попап закрылся
     public void OnLevelUpPopupFinished()
     {
         ApplyLevelSettings();
@@ -104,26 +110,27 @@ public class LevelManager : MonoBehaviour
 
     void ApplyLevelSettings()
     {
-        // Скорость рыб — одинаково для обоих режимов
-        float fishSpeed = 1f + (currentLevel - 1) * 0.4f;
-        SetAllFishSpeed(fishSpeed);
-
-        // Таймер с 3 уровня — одинаково для обоих режимов
         if (timerController != null)
         {
-            if (currentLevel >= 3)
+            Debug.Log("timerController найден! Уровень: " + currentLevel);
+            if (currentLevel >= 2)
             {
-                float duration = 20f + (currentLevel - 3) * 5f;
+                float duration = 20f + (currentLevel - 2) * 5f;
                 timerController.SetTimer(duration);
                 timerController.gameObject.SetActive(true);
+                Debug.Log("Таймер включён!");
             }
             else
             {
                 timerController.gameObject.SetActive(false);
+                Debug.Log("Таймер выключен!");
             }
         }
+        else
+        {
+            Debug.LogError("timerController НЕ НАЗНАЧЕН в LevelManager!");
+        }
 
-        // Сложность — зависит от режима
         if (gameMode == Mode.Math && mathManager != null)
             mathManager.SetDifficulty(currentLevel);
 
@@ -135,24 +142,12 @@ public class LevelManager : MonoBehaviour
 
     void ResetLevelTriggers()
     {
-
         // Выключаем темноту
         DarknessController darkness = FindAnyObjectByType<DarknessController>();
         if (darkness != null) darkness.DisableDarkness();
 
-        // Сбрасываем флаг камеры
-        CameraController cam = FindAnyObjectByType<CameraController>();
-        if (cam != null) cam.darknessTriggered = false;
-
         // Убираем акулу
         GameObject shark = GameObject.FindGameObjectWithTag("Shark");
         if (shark != null) Destroy(shark);
-    }
-
-    void SetAllFishSpeed(float speed)
-    {
-        FishMovement[] allFish = FindObjectsByType<FishMovement>(FindObjectsSortMode.None);
-        foreach (var fish in allFish)
-            fish.speed = speed;
     }
 }

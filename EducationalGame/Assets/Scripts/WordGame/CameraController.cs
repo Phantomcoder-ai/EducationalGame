@@ -14,10 +14,6 @@ public class CameraController : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     public float smoothTime = 0.15f;
 
-    [Header("Затемнение")]
-    public DarknessController darknessController;
-    public bool darknessTriggered = false; // чтобы не вызывать каждый кадр
-
     void LateUpdate()
     {
         float targetY = transform.position.y;
@@ -26,7 +22,6 @@ public class CameraController : MonoBehaviour
         {
             case CameraState.AtBeach:
                 targetY = maxY;
-                darknessTriggered = false; // сбрасываем при возврате наверх
                 break;
 
             case CameraState.FollowingHook:
@@ -35,19 +30,6 @@ public class CameraController : MonoBehaviour
 
             case CameraState.LockedAtBottom:
                 targetY = minY;
-
-                // Включаем затемнение только когда камера приехала вниз
-                // и LevelManager говорит что пора (5+ правильных ответов)
-                if (!darknessTriggered && darknessController != null)
-                {
-                    bool shouldBeDark = LevelManager.Instance != null &&
-                    LevelManager.Instance.correctAnswersThisLevel >= LevelManager.Instance.darknessStartAnswer;
-                    if (shouldBeDark)
-                    {
-                        darknessTriggered = true;
-                        darknessController.EnableDarkness();
-                    }
-                }
                 break;
         }
 

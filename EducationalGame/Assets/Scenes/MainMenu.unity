@@ -5891,7 +5891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingsPanel: {fileID: 1986906152}
   musicSlider: {fileID: 1036509748}
-  sfxSlider: {fileID: 0}
+  sfxSlider: {fileID: 1730364566}
 --- !u!114 &1961582600
 MonoBehaviour:
   m_ObjectHideFlags: 0
