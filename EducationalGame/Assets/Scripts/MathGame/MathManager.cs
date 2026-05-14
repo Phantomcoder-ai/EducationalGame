@@ -118,9 +118,15 @@ public class MathManager : MonoBehaviour
                 if (scoreText != null)
                     scoreText.text = "Score: " + LevelManager.Instance.totalScore;
             }
-                
+
+
+            // Обновляем рыб после правильного ответа
+            FishManager fishManager = FindAnyObjectByType<FishManager>();
+            if (fishManager != null)
+                fishManager.RefreshMathFish();
 
             StartCoroutine(ShowNextQuestionDelayed(1.2f));
+
             AudioManager.Instance?.PlayCatch();
             AudioManager.Instance?.PlayCorrect();
             return true;
@@ -291,5 +297,10 @@ public class MathManager : MonoBehaviour
         }
 
         return q;
+    }
+
+    public void RefreshFishNumbers()
+    {
+        UpdateFishAnswers(currentQuestion.correctAnswer);
     }
 }

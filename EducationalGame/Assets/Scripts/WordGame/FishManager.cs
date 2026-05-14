@@ -109,6 +109,26 @@ public class FishManager : MonoBehaviour
             Debug.LogWarning("FishManager: mathManager не назначен!");
     }
 
+    public void RefreshMathFish()
+    {
+        // Считаем сколько рыб осталось
+        FishMath[] remaining = FindObjectsByType<FishMath>(FindObjectsSortMode.None);
+
+        // Если рыб меньше половины от начального количества — спавним новых
+        int needed = mathFishCount - remaining.Length;
+        if (needed <= 0) return;
+
+        for (int i = 0; i < needed; i++)
+        {
+            GameObject newFish = SpawnFishAtRandom();
+            // MathManager сам обновит числа через UpdateFishAnswers
+        }
+
+        // Говорим MathManager обновить числа на всех рыбах
+        if (mathManager != null)
+            mathManager.RefreshFishNumbers();
+    }
+
     // --- ОБЩИЙ СПАВН ---
     GameObject SpawnFishAtRandom()
     {

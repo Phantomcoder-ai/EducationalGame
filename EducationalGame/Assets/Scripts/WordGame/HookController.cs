@@ -88,8 +88,20 @@ public class HookController : MonoBehaviour
             {
                 if (fishInRange != null && caughtFish == null)
                 {
-                    AttachFish(fishInRange);
-                    StartReeling();
+                    // Проверяем — золотая рыбка или обычная
+                    GoldenFish golden = fishInRange.GetComponent<GoldenFish>();
+                    if (golden != null)
+                    {
+                        // Золотую рыбку ловим на месте — крючок не поднимается
+                        golden.Catch();
+                        fishInRange = null;
+                    }
+                    else
+                    {
+                        // Обычная рыба — цепляем и поднимаемся
+                        AttachFish(fishInRange);
+                        StartReeling();
+                    }
                 }
                 else
                 {
@@ -235,11 +247,11 @@ public class HookController : MonoBehaviour
             return;
         }
 
-        // Проверяем золотую рыбку
+        // Золотую рыбку просто сбрасываем из зоны — НЕ ловим
         GoldenFish golden = other.GetComponentInParent<GoldenFish>();
         if (golden != null)
         {
-            golden.Catch();
+            fishInRange = null;
             return;
         }
 
@@ -366,7 +378,13 @@ public class HookController : MonoBehaviour
             float randomX = Random.Range(-8f, 8f);
             float randomY = Random.Range(-15f, -8f);
             child.position = new Vector3(randomX, randomY, 0);
+            // Отнимаем жизнь здесь
+            if (HealthManager.Instance != null)
+                HealthManager.Instance.TakeDamage(1);
 
+            // Главное — обнуляем caughtFish!
+            // Без этого крючок наверху всё равно обработает рыбу
+            caughtFish = null;
             Debug.Log("<color=red>Акула съела рыбу! Рыба вернулась в воду.</color>");
             break;
         }
