@@ -91,6 +91,7 @@ public class GamePause : MonoBehaviour
         if (settingsPanel != null) settingsPanel.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void OpenSettings()
@@ -101,6 +102,7 @@ public class GamePause : MonoBehaviour
                 child.gameObject.SetActive(false);
         }
         settingsPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void CloseSettings()
@@ -109,6 +111,7 @@ public class GamePause : MonoBehaviour
         settingsPanel.SetActive(false);
         foreach (Transform child in menuPanel.transform)
             child.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     void OnMusicChanged(float value) => AudioManager.Instance?.SetMusicVolume(value);
@@ -125,11 +128,13 @@ public class GamePause : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void QuitToMain()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }

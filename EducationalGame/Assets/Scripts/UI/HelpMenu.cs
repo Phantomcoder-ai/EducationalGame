@@ -1,9 +1,19 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class HelpMenu : MonoBehaviour
 {
     [Header("UI")]
     public GameObject helpPanel;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (helpPanel != null && helpPanel.activeSelf)
+                CloseHelp();
+        }
+    }
 
     void Start()
     {
@@ -13,10 +23,12 @@ public class HelpMenu : MonoBehaviour
     public void OpenHelp()
     {
         helpPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void CloseHelp()
     {
         helpPanel.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }
