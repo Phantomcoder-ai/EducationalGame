@@ -29,7 +29,6 @@ public class HookController : MonoBehaviour
         isIntro = true;
         camControl.currentState = CameraController.CameraState.FollowingHook;
 
-        // Темнота только если LevelManager разрешает
         if (LevelManager.Instance != null && LevelManager.Instance.IsDarknessAllowed())
         {
             DarknessController darkness = FindAnyObjectByType<DarknessController>();
@@ -52,9 +51,6 @@ public class HookController : MonoBehaviour
                 canMove = true;
                 camControl.currentState = CameraController.CameraState.LockedAtBottom;
 
-                // Возобновляем темноту когда крючок опустился
-                DarknessController darkness = FindAnyObjectByType<DarknessController>();
-                if (darkness != null) darkness.ResumeDarkness();
                 // Запускаем таймер если он активен
                 TimerController timer = FindAnyObjectByType<TimerController>();
                 if (timer != null && timer.gameObject.activeSelf)

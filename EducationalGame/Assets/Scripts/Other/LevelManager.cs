@@ -91,6 +91,10 @@ public class LevelManager : MonoBehaviour
 
         currentLevel++;
 
+        // Бонусная жизнь за прохождение уровня
+        if (HealthManager.Instance != null)
+            HealthManager.Instance.Heal(1);
+
         if (timerController != null)
             timerController.StopTimer();
 
@@ -142,9 +146,10 @@ public class LevelManager : MonoBehaviour
 
     void ResetLevelTriggers()
     {
-        // Выключаем темноту
+        // Темноту НЕ выключаем полностью — просто скрываем overlay
+        // она сама включится при следующем забросе если уровень >= darknessLevel
         DarknessController darkness = FindAnyObjectByType<DarknessController>();
-        if (darkness != null) darkness.DisableDarkness();
+        if (darkness != null) darkness.PauseDarkness();
 
         // Убираем акулу
         GameObject shark = GameObject.FindGameObjectWithTag("Shark");

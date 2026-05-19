@@ -73,6 +73,13 @@ public class FishManager : MonoBehaviour
             char randomChar = alphabet[Random.Range(0, alphabet.Length)];
             CreateLetterFish(randomChar.ToString());
         }
+        // Фугу появляется со 2 уровня
+        if (fuguPrefab != null && LevelManager.Instance != null &&
+            LevelManager.Instance.currentLevel >= 1)
+        {
+            for (int i = 0; i < fuguCount; i++)
+                SpawnFuguAtRandom();
+        }
     }
 
     void CreateLetterFish(string letter)
