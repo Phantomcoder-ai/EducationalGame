@@ -1,16 +1,23 @@
+ï»¿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GamePause : MonoBehaviour
 {
-    [Header("Ïàíåëè")]
+    [Header("ÐŸÐ°Ð½ÐµÐ»Ð¸")]
     public GameObject menuPanel;
     public GameObject settingsPanel;
 
-    [Header("Ñëàéäåðû")]
+    [Header("Ð¡Ð»Ð°Ð¹Ð´ÐµÑ€Ñ‹")]
     public Slider musicSlider;
     public Slider sfxSlider;
+
+    [Header("Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ Ð¾Ð± ÑƒÑ€Ð¾Ð²Ð½Ðµ")]
+    public TextMeshProUGUI levelText;
+    public TextMeshProUGUI progressText;
+    public TextMeshProUGUI scoreText;
 
     private bool isPaused = false;
 
@@ -19,7 +26,6 @@ public class GamePause : MonoBehaviour
         if (menuPanel != null) menuPanel.SetActive(false);
         if (settingsPanel != null) settingsPanel.SetActive(false);
 
-        // Çàãðóæàåì ñîõðàí¸ííûå çíà÷åíèÿ
         float savedMusic = PlayerPrefs.GetFloat("MusicVolume", 1f);
         float savedSFX = PlayerPrefs.GetFloat("SFXVolume", 1f);
 
@@ -43,7 +49,7 @@ public class GamePause : MonoBehaviour
             if (!isPaused)
                 PauseGame();
             else if (settingsPanel != null && settingsPanel.activeSelf)
-                CloseSettings(); // Escape çàêðûâàåò íàñòðîéêè îáðàòíî â ïàóçó
+                CloseSettings();
             else
                 ResumeGame();
         }
@@ -54,6 +60,29 @@ public class GamePause : MonoBehaviour
         menuPanel.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
+
+        // ÐžÐ±Ð½Ð¾Ð²Ð»ÑÐµÐ¼ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÑŽ Ð¿Ñ€Ð¸ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚Ð¸Ð¸ Ð¿Ð°ÑƒÐ·Ñ‹
+        UpdateStatsUI();
+    }
+
+    void UpdateStatsUI()
+    {
+        if (LevelManager.Instance == null) return;
+
+        if (levelText != null)
+            levelText.text = "Poziom: " + LevelManager.Instance.currentLevel;
+
+        if (progressText != null)
+        {
+            int current = LevelManager.Instance.correctAnswersThisLevel;
+            int needed = LevelManager.Instance.gameMode == LevelManager.Mode.Math
+                ? LevelManager.Instance.correctAnswersPerLevelMath
+                : LevelManager.Instance.correctAnswersPerLevelWord;
+            progressText.text = "PostÄ™p: " + current + " / " + needed;
+        }
+
+        if (scoreText != null)
+            scoreText.text = "Wynik: " + LevelManager.Instance.totalScore;
     }
 
     public void ResumeGame()
@@ -62,45 +91,36 @@ public class GamePause : MonoBehaviour
         if (settingsPanel != null) settingsPanel.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void OpenSettings()
     {
-        // Ïðÿ÷åì êíîïêè, ïîêàçûâàåì íàñòðîéêè
         foreach (Transform child in menuPanel.transform)
         {
             if (child.gameObject != settingsPanel)
                 child.gameObject.SetActive(false);
         }
         settingsPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void CloseSettings()
     {
-        // Ñîõðàíÿåì è âîçâðàùàåìñÿ ê êíîïêàì
         SaveSettings();
         settingsPanel.SetActive(false);
-
         foreach (Transform child in menuPanel.transform)
             child.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
-    void OnMusicChanged(float value)
-    {
-        AudioManager.Instance?.SetMusicVolume(value);
-    }
-
-    void OnSFXChanged(float value)
-    {
-        AudioManager.Instance?.SetSFXVolume(value);
-    }
+    void OnMusicChanged(float value) => AudioManager.Instance?.SetMusicVolume(value);
+    void OnSFXChanged(float value) => AudioManager.Instance?.SetSFXVolume(value);
 
     void SaveSettings()
     {
-        if (musicSlider != null)
-            PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
-        if (sfxSlider != null)
-            PlayerPrefs.SetFloat("SFXVolume", sfxSlider.value);
+        if (musicSlider != null) PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
+        if (sfxSlider != null) PlayerPrefs.SetFloat("SFXVolume", sfxSlider.value);
         PlayerPrefs.Save();
     }
 
@@ -108,11 +128,13 @@ public class GamePause : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void QuitToMain()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }

@@ -1,15 +1,25 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class SettingsMenu : MonoBehaviour
 {
     [Header("UI")]
     public GameObject settingsPanel;
+    public GameObject helpPanel;
 
     [Header("Слайдеры")]
     public Slider musicSlider;
     public Slider sfxSlider;
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (settingsPanel != null && settingsPanel.activeSelf)
+                CloseSettings();
+        }
+    }
 
     void Start()
     {
@@ -36,7 +46,7 @@ public class SettingsMenu : MonoBehaviour
         AudioManager.Instance?.SetMusicVolume(savedMusic);
         AudioManager.Instance?.SetSFXVolume(savedSFX);
     }
-
+    
     void OnMusicVolumeChanged(float value)
     {
         AudioManager.Instance?.SetMusicVolume(value);
@@ -50,11 +60,13 @@ public class SettingsMenu : MonoBehaviour
     public void OpenSettings()
     {
         settingsPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void CloseSettings()
     {
         settingsPanel.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void ApplySettings()
@@ -70,5 +82,6 @@ public class SettingsMenu : MonoBehaviour
 
         Debug.Log("Настройки сохранены!");
         settingsPanel.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }

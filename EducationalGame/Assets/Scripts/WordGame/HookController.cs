@@ -23,19 +23,17 @@ public class HookController : MonoBehaviour
 
     public void OnCastAnimationFinished()
     {
-        // 1. Находим компонент Animator на этом объекте
         Animator anim = GetComponent<Animator>();
+        if (anim != null) anim.enabled = false;
 
-        // 2. Если он есть, выключаем его
-        if (anim != null)
-        {
-            anim.enabled = false;
-            Debug.Log("Аниматор выключен. Теперь скрипт может двигать крючок!");
-        }
-
-        // 3. Запускаем падение и движение камеры
         isIntro = true;
         camControl.currentState = CameraController.CameraState.FollowingHook;
+
+        if (LevelManager.Instance != null && LevelManager.Instance.IsDarknessAllowed())
+        {
+            DarknessController darkness = FindAnyObjectByType<DarknessController>();
+            if (darkness != null) darkness.EnableDarkness();
+        }
     }
 
     void Update()
@@ -53,9 +51,6 @@ public class HookController : MonoBehaviour
                 canMove = true;
                 camControl.currentState = CameraController.CameraState.LockedAtBottom;
 
-                // Возобновляем темноту когда крючок опустился
-                DarknessController darkness = FindAnyObjectByType<DarknessController>();
-                if (darkness != null) darkness.ResumeDarkness();
                 // Запускаем таймер если он активен
                 TimerController timer = FindAnyObjectByType<TimerController>();
                 if (timer != null && timer.gameObject.activeSelf)
@@ -89,8 +84,20 @@ public class HookController : MonoBehaviour
             {
                 if (fishInRange != null && caughtFish == null)
                 {
-                    AttachFish(fishInRange);
-                    StartReeling();
+                    // Проверяем — золотая рыбка или обычная
+                    GoldenFish golden = fishInRange.GetComponent<GoldenFish>();
+                    if (golden != null)
+                    {
+                        // Золотую рыбку ловим на месте — крючок не поднимается
+                        golden.Catch();
+                        fishInRange = null;
+                    }
+                    else
+                    {
+                        // Обычная рыба — цепляем и поднимаемся
+                        AttachFish(fishInRange);
+                        StartReeling();
+                    }
                 }
                 else
                 {
@@ -113,12 +120,12 @@ public class HookController : MonoBehaviour
                 isReelingIn = false;
                 camControl.currentState = CameraController.CameraState.AtBeach;
                 // Останавливаем и сбрасываем таймер
-                /*TimerController timer = FindAnyObjectByType<TimerController>();
+                TimerController timer = FindAnyObjectByType<TimerController>();
                 if (timer != null)
                 {
                     timer.StopTimer();
                     timer.ResetTimer();
-                }*/
+                }
                 // Обработка пойманной рыбы: сначала пытаемся распознать тип и передать в соответствующий менеджер
                 if (caughtFish != null)
                 {
@@ -236,11 +243,11 @@ public class HookController : MonoBehaviour
             return;
         }
 
-        // Проверяем золотую рыбку
+        // Золотую рыбку просто сбрасываем из зоны — НЕ ловим
         GoldenFish golden = other.GetComponentInParent<GoldenFish>();
         if (golden != null)
         {
-            golden.Catch();
+            fishInRange = null;
             return;
         }
 
@@ -302,6 +309,13 @@ public class HookController : MonoBehaviour
 
         // Сбрасываем флаг зоны (мы уже поймали эту рыбу)
         if (fishInRange == caughtFish) fishInRange = null;
+
+        // Выключаем темноту перед подъёмом
+        if (LevelManager.Instance != null && LevelManager.Instance.IsDarknessAllowed())
+        {
+            DarknessController darkness = FindAnyObjectByType<DarknessController>();
+            if (darkness != null) darkness.PauseDarkness();
+        }
         // Останавливаем и сбрасываем таймер
         TimerController timer = FindAnyObjectByType<TimerController>();
         if (timer != null)
@@ -318,16 +332,15 @@ public class HookController : MonoBehaviour
         StartReeling();
         // 2. Если на крючке в этот момент была рыба — её нужно отцепить (съела акула)
         // Предположим, рыба становится ребенком крючка при поимке:
-        if (transform.childCount > 0)
+        foreach (Transform child in transform)
         {
-            foreach (Transform child in transform)
+            // Было: child.CompareTag("Fish") — не найдёт!
+            // Исправляем на поиск через FishMovement
+            FishMovement fm = child.GetComponentInChildren<FishMovement>();
+            if (fm != null)
             {
-                // Если это рыба, уничтожаем её или отцепляем
-                if (child.CompareTag("Fish"))
-                {
-                    Destroy(child.gameObject);
-                    Debug.Log("Акула заставила бросить рыбу!");
-                }
+                Destroy(child.gameObject);
+                Debug.Log("Акула заставила бросить рыбу!");
             }
         }
 
@@ -337,34 +350,39 @@ public class HookController : MonoBehaviour
 
     public void SharkEatFish()
     {
-        // Ищем рыбу среди дочерних объектов крючка
         foreach (Transform child in transform)
         {
-            if (child.CompareTag("Fish"))
+            // Ищем FishMovement в дочерних объектах — надёжнее чем тег
+            FishMovement fm = child.GetComponentInChildren<FishMovement>();
+            if (fm == null) continue;
+
+            // Отцепляем от крючка
+            child.SetParent(null);
+
+            // Включаем физику
+            Rigidbody2D rb = child.GetComponent<Rigidbody2D>();
+            if (rb != null)
             {
-                // Отцепляем от крючка
-                child.SetParent(null);
-
-                // Включаем физику и движение обратно
-                Rigidbody2D rb = child.GetComponent<Rigidbody2D>();
-                if (rb != null)
-                {
-                    rb.simulated = true;
-                    rb.linearVelocity = Vector2.zero;
-                }
-
-                FishMovement fm = child.GetComponent<FishMovement>();
-                if (fm == null) fm = child.GetComponentInChildren<FishMovement>();
-                if (fm != null) fm.enabled = true;
-
-                // Возвращаем в случайное место воды
-                float randomX = Random.Range(-8f, 8f);
-                float randomY = Random.Range(-15f, -8f);
-                child.position = new Vector3(randomX, randomY, 0);
-
-                Debug.Log("<color=red>Акула съела рыбу! Рыба вернулась в воду.</color>");
-                break;
+                rb.simulated = true;
+                rb.linearVelocity = Vector2.zero;
             }
+
+            // Включаем движение
+            fm.enabled = true;
+
+            // Возвращаем в воду
+            float randomX = Random.Range(-8f, 8f);
+            float randomY = Random.Range(-15f, -8f);
+            child.position = new Vector3(randomX, randomY, 0);
+            // Отнимаем жизнь здесь
+            if (HealthManager.Instance != null)
+                HealthManager.Instance.TakeDamage(1);
+
+            // Главное — обнуляем caughtFish!
+            // Без этого крючок наверху всё равно обработает рыбу
+            caughtFish = null;
+            Debug.Log("<color=red>Акула съела рыбу! Рыба вернулась в воду.</color>");
+            break;
         }
     }
 
@@ -394,10 +412,6 @@ public class HookController : MonoBehaviour
         canMove = false;
         isReelingIn = true;
         camControl.currentState = CameraController.CameraState.FollowingHook; // Камера снова едет за крючком
-
-        // Скрываем темноту пока крючок поднимается
-        DarknessController darkness = FindAnyObjectByType<DarknessController>();
-        if (darkness != null) darkness.PauseDarkness();
     }
 
 }

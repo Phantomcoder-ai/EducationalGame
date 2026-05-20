@@ -73,6 +73,13 @@ public class FishManager : MonoBehaviour
             char randomChar = alphabet[Random.Range(0, alphabet.Length)];
             CreateLetterFish(randomChar.ToString());
         }
+        // Фугу появляется со 2 уровня
+        if (fuguPrefab != null && LevelManager.Instance != null &&
+            LevelManager.Instance.currentLevel >= 1)
+        {
+            for (int i = 0; i < fuguCount; i++)
+                SpawnFuguAtRandom();
+        }
     }
 
     void CreateLetterFish(string letter)
@@ -109,23 +116,49 @@ public class FishManager : MonoBehaviour
             Debug.LogWarning("FishManager: mathManager не назначен!");
     }
 
+    public void RefreshMathFish()
+    {
+        // Считаем сколько рыб осталось
+        FishMath[] remaining = FindObjectsByType<FishMath>(FindObjectsSortMode.None);
+
+        // Если рыб меньше половины от начального количества — спавним новых
+        int needed = mathFishCount - remaining.Length;
+        if (needed <= 0) return;
+
+        for (int i = 0; i < needed; i++)
+        {
+            GameObject newFish = SpawnFishAtRandom();
+            // MathManager сам обновит числа через UpdateFishAnswers
+        }
+
+        // Говорим MathManager обновить числа на всех рыбах
+        if (mathManager != null)
+            mathManager.RefreshFishNumbers();
+    }
+
     // --- ОБЩИЙ СПАВН ---
     GameObject SpawnFishAtRandom()
     {
         GameObject prefab = fishPrefabs[Random.Range(0, fishPrefabs.Length)];
-
-        // Сначала создаём рыбу в нулевой точке
         GameObject newFish = Instantiate(prefab, Vector3.zero, Quaternion.identity);
 
         FishMovement movement = newFish.GetComponent<FishMovement>();
         if (movement != null)
         {
-            // Берём границы прямо из FishMovement
             float x = Random.Range(movement.minX, movement.maxX);
             float y = Random.Range(movement.minY, movement.maxY);
             newFish.transform.position = new Vector3(x, y, 0);
 
-            movement.speed = Random.Range(1f, 2.5f);
+            // Базовая скорость зависит от уровня
+            int level = LevelManager.Instance != null ? LevelManager.Instance.currentLevel : 1;
+            float baseSpeed = 1f + (level - 1) * 0.4f;
+
+            // Рандом ±0.5 от базовой скорости
+            float randomSpeed = Random.Range(baseSpeed - 0.5f, baseSpeed + 0.5f);
+            randomSpeed = Mathf.Max(randomSpeed, 0.5f); // не меньше 0.5
+
+            movement.speed = randomSpeed;
+            movement.originalSpeed = randomSpeed;
             movement.movingRight = (Random.value > 0.5f);
         }
 

@@ -108,8 +108,7 @@ public class SharkMovement : MonoBehaviour
 
             /*AudioManager.Instance?.PlayShark();*/
 
-            if (HealthManager.Instance != null)
-                HealthManager.Instance.TakeDamage(1);
+            
 
             // Если крючок поднимается и на нём есть рыба — акула её съедает
             if (hook.isReelingIn)
@@ -118,6 +117,8 @@ public class SharkMovement : MonoBehaviour
             }
             else
             {
+                if (HealthManager.Instance != null)
+                HealthManager.Instance.TakeDamage(1);
                 // Обычная атака — крючок принудительно поднимается
                 hook.ForceReturn();
             }

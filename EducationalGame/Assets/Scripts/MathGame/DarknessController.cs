@@ -56,22 +56,21 @@ public class DarknessController : MonoBehaviour
     public void EnableDarkness()
     {
         TutorialManager.Instance?.OnDarknessEnabled();
-        if (isActive) return; // уже включено
-        
+
         isActive = true;
-        fadeTimer = 0f;
-        isFading = true;
 
         if (darknessOverlay != null)
         {
             darknessOverlay.SetActive(true);
 
-            // Начинаем с нулевой прозрачности
-            if (canvasGroup != null)
+            // Сбрасываем fade только если overlay был скрыт
+            if (canvasGroup != null && canvasGroup.alpha < 0.01f)
+            {
+                fadeTimer = 0f;
+                isFading = true;
                 canvasGroup.alpha = 0f;
+            }
         }
-
-        Debug.Log("Темнота включена — плавное появление!");
     }
 
     public void PauseDarkness()

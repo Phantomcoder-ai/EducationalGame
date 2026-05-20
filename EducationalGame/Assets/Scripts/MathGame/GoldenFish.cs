@@ -14,9 +14,10 @@ public class GoldenFish : MonoBehaviour
     {
         FishMovement movement = GetComponent<FishMovement>();
         if (movement != null)
+        {
             movement.speed *= speedMultiplier;
-
-        // Автоматически исчезает через lifetime секунд
+            movement.originalSpeed = movement.speed; // сохраняем чтобы паника не сломала
+        }
         StartCoroutine(LifetimeRoutine());
     }
 
