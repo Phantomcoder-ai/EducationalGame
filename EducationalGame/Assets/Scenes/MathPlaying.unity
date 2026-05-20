@@ -251,7 +251,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8250941079131470181, guid: cb0a7166f9f40ad48b83d712ee35b6e4, type: 3}
+  m_Sprite: {fileID: -3087343679106239369, guid: 29a87192850a55640bf6a8555ac0fa7b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1268,7 +1268,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 5621682585073974309, guid: 600ca5e9b7c43ec44b1b55e439855a6d, type: 3}
+  m_Sprite: {fileID: -3087343679106239369, guid: 29a87192850a55640bf6a8555ac0fa7b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2212,7 +2212,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 2"
+  m_text: Poziom 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2674,7 +2674,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C \u043F\u0440\u043E\u0439\u0434\u0435\u043D!"
+  m_text: "Poziom uko\u0144czony!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2701,7 +2701,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 87.15
+  m_fontSize: 83.9
   m_fontSizeBase: 170
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2926,7 +2926,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 25
+  m_SortingOrder: 35
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -4579,7 +4579,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score: 0'
+  m_text: 'Punkty: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4842,8 +4842,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 20
-  m_Sprite: {fileID: 4445528089980358180, guid: b23bd3817d3dd3f47ad078a8e80e7e79, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -5697911671206164014, guid: 4e05ac3aa44d8cc4aaf47e30d47276e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4863,8 +4863,8 @@ Transform:
   m_GameObject: {fileID: 1167213708}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.2695, y: -8.86, z: 0}
-  m_LocalScale: {x: 3.3319237, y: 4.136839, z: 1}
+  m_LocalPosition: {x: 0, y: -9.2192, z: 0}
+  m_LocalScale: {x: 0.63, y: 0.75775206, z: 0.13771981}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -6366,7 +6366,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -78.29999, y: -46.64456}
+  m_AnchoredPosition: {x: -78.299805, y: -46.64453}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1488582507
@@ -6550,7 +6550,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4843831606769772515, guid: 35a313d827f7e1849873f2be92793ad3, type: 3}
+  m_Sprite: {fileID: -3087343679106239369, guid: 29a87192850a55640bf6a8555ac0fa7b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6570,8 +6570,8 @@ Transform:
   m_GameObject: {fileID: 1526303422}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.2543, y: 6.22, z: 0}
-  m_LocalScale: {x: 3.35, y: 2.5, z: 1}
+  m_LocalPosition: {x: 0, y: 4.7309, z: 0}
+  m_LocalScale: {x: 0.63, y: 0.5340524, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -7098,7 +7098,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041E\u0447\u043A\u0438: 150"
+  m_text: 'Punkty: 150'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7356,7 +7356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f08363291c6bce47ae45f78933e7729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beachPoint: {fileID: 1526303424}
+  beachPoint: {fileID: 0}
   hook: {fileID: 639635305}
   followSpeed: 5
   minY: -12
@@ -8367,7 +8367,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8387,8 +8387,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 50
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_SortingOrder: 10
+  m_Sprite: {fileID: 3286163911610860551, guid: fca3206b0a4a17244b280f36fb633ba3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8408,7 +8408,7 @@ Transform:
   m_GameObject: {fileID: 1908508938}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.15, y: 5, z: 0}
+  m_LocalPosition: {x: -4.86, y: 3.81, z: 0}
   m_LocalScale: {x: 1.132, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 14445fd1377bb944889220d233f17f9b
+guid: 4e05ac3aa44d8cc4aaf47e30d47276e9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3066503393598026269
-    second: Fish2_0
+      213: -5697911671206164014
+    second: Maket_canvas_size-Recovered(bottom)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fish2_0
+      name: Maket_canvas_size-Recovered(bottom)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1207
-        height: 648
+        width: 3840
+        height: 2160
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3ed4f0a19679175d0800000000000000
-      internalID: -3066503393598026269
+      spriteID: 2d9443c1683fce0b0800000000000000
+      internalID: -5697911671206164014
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Fish2_0: -3066503393598026269
+      Maket_canvas_size-Recovered(bottom)_0: -5697911671206164014
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
