@@ -10,7 +10,7 @@ public class LevelUpPopup : MonoBehaviour
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI scoreText;
 
-    [Header("Настройки")]
+    [Header("Ustawienia")]
     public float displayDuration = 2.5f;
     public float fadeDuration = 0.4f;
 
@@ -26,10 +26,10 @@ public class LevelUpPopup : MonoBehaviour
     public void Show(int newLevel, int score)
     {
         if (levelText != null)
-            levelText.text = newLevel >= 6 ? "ПОБЕДА!" : $"УРОВЕНЬ {newLevel}";
+            levelText.text = newLevel >= 6 ? "Gratulacje!" : $"Poziom {newLevel}";
         if (scoreText != null)
-            scoreText.text = "Очки: " + score;
-        // Показываем
+            scoreText.text = "Punkty: " + score;
+        // Pokazujemy
         gameObject.SetActive(true);
         StopAllCoroutines();
         StartCoroutine(ShowRoutine());

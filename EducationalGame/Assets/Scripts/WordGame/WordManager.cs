@@ -280,7 +280,7 @@ public class WordManager : MonoBehaviour
         {
             LevelManager.Instance.OnCorrectAnswer();
             if (scoreText != null)
-                scoreText.text = "Score: " + LevelManager.Instance.totalScore;
+                scoreText.text = "Punkty: " + LevelManager.Instance.totalScore;
         }
 
         

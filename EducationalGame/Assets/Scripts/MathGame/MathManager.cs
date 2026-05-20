@@ -116,7 +116,7 @@ public class MathManager : MonoBehaviour
             if (LevelManager.Instance != null) { 
                 LevelManager.Instance.OnCorrectAnswer();
                 if (scoreText != null)
-                    scoreText.text = "Score: " + LevelManager.Instance.totalScore;
+                    scoreText.text = "Punkty: " + LevelManager.Instance.totalScore;
             }
 
 
